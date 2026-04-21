@@ -138,9 +138,31 @@ class JadwalForm extends Component
 
     public function render()
     {
+        try {
+            $mekaniks = \Illuminate\Support\Facades\Cache::remember('master_mekaniks', now()->addHour(), fn() => User::role('Mekanik')->get());
+            if (!($mekaniks instanceof \Illuminate\Support\Collection)) {
+                \Illuminate\Support\Facades\Cache::forget('master_mekaniks');
+                $mekaniks = User::role('Mekanik')->get();
+            }
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Cache::forget('master_mekaniks');
+            $mekaniks = User::role('Mekanik')->get();
+        }
+
+        try {
+            $kendaraans = \Illuminate\Support\Facades\Cache::remember('master_kendaraan', now()->addDay(), fn() => Kendaraan::all());
+            if (!($kendaraans instanceof \Illuminate\Support\Collection)) {
+                \Illuminate\Support\Facades\Cache::forget('master_kendaraan');
+                $kendaraans = Kendaraan::all();
+            }
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Cache::forget('master_kendaraan');
+            $kendaraans = Kendaraan::all();
+        }
+
         return view('livewire.jadwal-form', [
-            'kendaraans' => Kendaraan::orderBy('nomor_ranpur')->get(),
-            'mekaniks' => User::role('Mekanik')->get(),
+            'kendaraans' => $kendaraans,
+            'mekaniks' => $mekaniks,
         ]);
     }
 }

@@ -32,8 +32,10 @@
                             <div class="flex-1">
                                 <select wire:model="items.{{ $index }}.suku_cadang_id" class="w-full text-sm rounded-md border-gray-300 shadow-sm focus:border-[#1B3A2D] focus:ring-[#1B3A2D]">
                                     <option value="">-- Pilih Suku Cadang --</option>
-                                    @foreach($sukuCadangs as $sc)
-                                    <option value="{{ $sc->id }}">{{ $sc->nama }} (Stok: {{ $sc->stok }} {{ $sc->satuan }})</option>
+                                    @foreach(collect($sukuCadangs) as $sc)
+                                        @if(is_object($sc))
+                                            <option value="{{ $sc->id }}">{{ $sc->nama }} (Stok: {{ $sc->stok }} {{ $sc->satuan }})</option>
+                                        @endif
                                     @endforeach
                                 </select>
                                 @error("items.{$index}.suku_cadang_id") <span class="text-red-500 text-xs">{{ $message }}</span> @enderror

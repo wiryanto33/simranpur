@@ -95,9 +95,18 @@ class PermintaanSukuCadangForm extends Component
 
     public function render()
     {
-        $sukuCadangList = \Illuminate\Support\Facades\Cache::remember('master_suku_cadang_available', now()->addHour(), function() {
-            return SukuCadang::where('stok', '>', 0)->orderBy('nama')->get();
-        });
+        try {
+            $sukuCadangList = \Illuminate\Support\Facades\Cache::remember('master_suku_cadang_available', now()->addHour(), function() {
+                return SukuCadang::where('stok', '>', 0)->orderBy('nama')->get();
+            });
+            if (!($sukuCadangList instanceof \Illuminate\Support\Collection)) {
+                \Illuminate\Support\Facades\Cache::forget('master_suku_cadang_available');
+                $sukuCadangList = SukuCadang::where('stok', '>', 0)->orderBy('nama')->get();
+            }
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Cache::forget('master_suku_cadang_available');
+            $sukuCadangList = SukuCadang::where('stok', '>', 0)->orderBy('nama')->get();
+        }
 
         return view('livewire.permintaan-suku-cadang-form', [
             'sukuCadangs' => $sukuCadangList,

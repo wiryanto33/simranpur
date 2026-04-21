@@ -59,8 +59,10 @@
                                     <label class="block text-sm font-medium text-gray-700">Kompi <span class="text-red-500">*</span></label>
                                     <select wire:model="kompi_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#2D5A45] focus:ring focus:ring-[#2D5A45] focus:ring-opacity-50">
                                         <option value="">-- Pilih Kompi --</option>
-                                        @foreach($kompiList as $kompi)
-                                            <option value="{{ $kompi->id }}">{{ $kompi->nama }} ({{ $kompi->kode }})</option>
+                                        @foreach(collect($kompiList) as $kompi)
+                                            @if(is_object($kompi))
+                                                <option value="{{ $kompi->id }}">{{ $kompi->nama }} ({{ $kompi->kode }})</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                     @error('kompi_id') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror

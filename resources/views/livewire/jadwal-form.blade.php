@@ -29,8 +29,10 @@
                                         <label class="block text-sm font-medium text-gray-700">Pilih Kendaraan <span class="text-red-500">*</span></label>
                                         <select wire:model="kendaraan_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#2D5A45] focus:ring focus:ring-[#2D5A45] focus:ring-opacity-50">
                                             <option value="">-- Pilih Kendaraan (Ranpur) --</option>
-                                            @foreach($kendaraans as $k)
-                                                <option value="{{ $k->id }}">{{ $k->nomor_ranpur }} - {{ $k->nama }}</option>
+                                            @foreach(collect($kendaraans) as $k)
+                                                @if(is_object($k))
+                                                    <option value="{{ $k->id }}">{{ $k->nomor_ranpur }} - {{ $k->nama }}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                         @error('kendaraan_id') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
@@ -65,11 +67,13 @@
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700">Tugaskan Mekanik <span class="text-red-500">*</span></label>
                                         <div class="mt-2 grid grid-cols-2 gap-2 max-h-40 overflow-y-auto p-3 border border-gray-300 rounded-md bg-white shadow-sm">
-                                            @foreach($mekaniks as $m)
-                                                <label class="flex items-center space-x-2 text-sm cursor-pointer hover:bg-gray-50 p-1 rounded">
-                                                    <input type="checkbox" wire:model="mekanik_ids" value="{{ $m->id }}" class="rounded border-gray-300 text-[#1B3A2D] focus:ring-[#1B3A2D]">
-                                                    <span class="text-gray-700">{{ $m->name }}</span>
-                                                </label>
+                                            @foreach(collect($mekaniks) as $m)
+                                                @if(is_object($m))
+                                                    <label class="flex items-center space-x-2 text-sm cursor-pointer hover:bg-gray-50 p-1 rounded">
+                                                        <input type="checkbox" wire:model="mekanik_ids" value="{{ $m->id }}" class="rounded border-gray-300 text-[#1B3A2D] focus:ring-[#1B3A2D]">
+                                                        <span class="text-gray-700">{{ $m->name }}</span>
+                                                    </label>
+                                                @endif
                                             @endforeach
                                         </div>
                                         @error('mekanik_ids') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror

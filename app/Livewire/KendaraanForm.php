@@ -123,10 +123,18 @@ class KendaraanForm extends Component
         $this->dispatch('kendaraanSaved', message: $message);
     }
 
-    public function render()
-    {
+        try {
+            $kompiList = \Illuminate\Support\Facades\Cache::remember('master_kompi', now()->addDay(), fn() => Kompi::all());
+            if (!($kompiList instanceof \Illuminate\Support\Collection)) {
+                \Illuminate\Support\Facades\Cache::forget('master_kompi');
+                $kompiList = Kompi::all();
+            }
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Cache::forget('master_kompi');
+            $kompiList = Kompi::all();
+        }
+
         return view('livewire.kendaraan-form', [
-            'kompiList' => \Illuminate\Support\Facades\Cache::remember('master_kompi', now()->addDay(), fn() => Kompi::all())
+            'kompiList' => $kompiList
         ]);
-    }
 }

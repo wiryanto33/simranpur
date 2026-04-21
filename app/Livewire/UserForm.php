@@ -153,9 +153,7 @@ class UserForm extends Component
 
     public function render()
     {
-        $kompis = \Illuminate\Support\Facades\Cache::remember('master_kompi', now()->addDay(), fn() => Kompi::all());
-        $kendaraans = \Illuminate\Support\Facades\Cache::remember('master_kendaraan', now()->addDay(), fn() => Kendaraan::orderBy('nomor_ranpur')->get());
-        
+        // Hardening Cache Retrieval
         try {
             $roles = \Illuminate\Support\Facades\Cache::remember('roles_all', now()->addDay(), fn() => Role::all());
             if (!($roles instanceof \Illuminate\Support\Collection)) {
@@ -165,6 +163,28 @@ class UserForm extends Component
         } catch (\Exception $e) {
             \Illuminate\Support\Facades\Cache::forget('roles_all');
             $roles = Role::all();
+        }
+
+        try {
+            $kompis = \Illuminate\Support\Facades\Cache::remember('master_kompi', now()->addDay(), fn() => Kompi::all());
+            if (!($kompis instanceof \Illuminate\Support\Collection)) {
+                \Illuminate\Support\Facades\Cache::forget('master_kompi');
+                $kompis = Kompi::all();
+            }
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Cache::forget('master_kompi');
+            $kompis = Kompi::all();
+        }
+
+        try {
+            $kendaraans = \Illuminate\Support\Facades\Cache::remember('master_kendaraan', now()->addDay(), fn() => Kendaraan::orderBy('nomor_ranpur')->get());
+            if (!($kendaraans instanceof \Illuminate\Support\Collection)) {
+                \Illuminate\Support\Facades\Cache::forget('master_kendaraan');
+                $kendaraans = Kendaraan::orderBy('nomor_ranpur')->get();
+            }
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Cache::forget('master_kendaraan');
+            $kendaraans = Kendaraan::orderBy('nomor_ranpur')->get();
         }
 
         return view('livewire.user-form', [

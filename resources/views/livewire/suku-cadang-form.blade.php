@@ -40,7 +40,7 @@
                                     <label class="block text-sm font-medium text-gray-700">Satuan <span class="text-red-500">*</span></label>
                                     <input type="text" wire:model="satuan" list="satuan_list" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#2D5A45] focus:ring focus:ring-[#2D5A45] focus:ring-opacity-50" placeholder="Pilih atau ketik satuan">
                                     <datalist id="satuan_list">
-                                        @foreach($satuanList as $s)
+                                        @foreach(collect($satuanList) as $s)
                                             <option value="{{ $s }}">
                                         @endforeach
                                     </datalist>

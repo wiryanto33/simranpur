@@ -116,9 +116,18 @@ class SukuCadangForm extends Component
 
     public function render()
     {
-        $satuanList = \Illuminate\Support\Facades\Cache::remember('master_satuan', now()->addYear(), function() {
-            return ['Pcs', 'Set', 'Bottle', 'Litre', 'Kg', 'Roll', 'Box', 'Unit'];
-        });
+        try {
+            $satuanList = \Illuminate\Support\Facades\Cache::remember('master_satuan', now()->addYear(), function() {
+                return ['Pcs', 'Set', 'Bottle', 'Litre', 'Kg', 'Roll', 'Box', 'Unit'];
+            });
+            if (!is_array($satuanList)) {
+                \Illuminate\Support\Facades\Cache::forget('master_satuan');
+                $satuanList = ['Pcs', 'Set', 'Bottle', 'Litre', 'Kg', 'Roll', 'Box', 'Unit'];
+            }
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Cache::forget('master_satuan');
+            $satuanList = ['Pcs', 'Set', 'Bottle', 'Litre', 'Kg', 'Roll', 'Box', 'Unit'];
+        }
 
         return view('livewire.suku-cadang-form', [
             'satuanList' => $satuanList

@@ -198,10 +198,21 @@ class LaporanPerbaikanForm extends Component
 
     public function render()
     {
+        try {
+            $allSukuCadang = \Illuminate\Support\Facades\Cache::remember('master_suku_cadang', now()->addDay(), function() {
+                return SukuCadang::all();
+            });
+            if (!($allSukuCadang instanceof \Illuminate\Support\Collection)) {
+                \Illuminate\Support\Facades\Cache::forget('master_suku_cadang');
+                $allSukuCadang = SukuCadang::all();
+            }
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Cache::forget('master_suku_cadang');
+            $allSukuCadang = SukuCadang::all();
+        }
+
         return view('livewire.laporan-perbaikan-form', [
-            'allSukuCadang' => SukuCadang::where('stok', '>', 0)
-                ->orWhereIn('id', collect($this->sukuCadangList)->pluck('suku_cadang_id'))
-                ->get(),
+            'allSukuCadang' => $allSukuCadang
         ]);
     }
 }

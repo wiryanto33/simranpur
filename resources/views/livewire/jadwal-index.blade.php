@@ -38,8 +38,10 @@
                 <label class="block text-xs text-gray-500 mb-1">Mekanik</label>
                 <select wire:model.live="filterMekanik" class="w-full rounded-md border-gray-300 shadow-sm focus:border-[#2D5A45] focus:ring focus:ring-[#2D5A45] focus:ring-opacity-50 text-sm">
                     <option value="">Semua Mekanik</option>
-                    @foreach($mekaniks as $m)
-                        <option value="{{ $m->id }}">{{ $m->name }}</option>
+                    @foreach(collect($mekaniks) as $m)
+                        @if(is_object($m))
+                            <option value="{{ $m->id }}">{{ $m->name }}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -47,8 +49,10 @@
                 <label class="block text-xs text-gray-500 mb-1">Kendaraan</label>
                 <select wire:model.live="filterKendaraan" class="w-full rounded-md border-gray-300 shadow-sm focus:border-[#2D5A45] focus:ring focus:ring-[#2D5A45] focus:ring-opacity-50 text-sm">
                     <option value="">Semua Ranpur</option>
-                    @foreach($kendaraans as $k)
-                        <option value="{{ $k->id }}">{{ $k->nomor_ranpur }}</option>
+                    @foreach(collect($kendaraans) as $k)
+                        @if(is_object($k))
+                            <option value="{{ $k->id }}">{{ $k->nomor_ranpur }}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
