@@ -207,4 +207,5 @@ class JadwalIndex extends Component
             'mekaniks'   => $mekaniks,
             'kendaraans' => $kendaraans,
         ]);
+    }
 }

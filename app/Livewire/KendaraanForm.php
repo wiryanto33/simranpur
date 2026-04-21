@@ -139,4 +139,6 @@ class KendaraanForm extends Component
         return view('livewire.kendaraan-form', [
             'kompiList' => $kompiList
         ]);
+    }
 }
+
