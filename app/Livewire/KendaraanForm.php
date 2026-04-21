@@ -123,6 +123,8 @@ class KendaraanForm extends Component
         $this->dispatch('kendaraanSaved', message: $message);
     }
 
+    public function render()
+    {
         try {
             $kompiList = \Illuminate\Support\Facades\Cache::remember('master_kompi', now()->addDay(), fn() => Kompi::all());
             if (!($kompiList instanceof \Illuminate\Support\Collection)) {

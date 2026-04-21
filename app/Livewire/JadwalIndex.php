@@ -177,6 +177,8 @@ class JadwalIndex extends Component
         return $query->latest('tanggal');
     }
 
+    public function render()
+    {
         // Hardening Cache Retrieval
         try {
             $mekaniks = \Illuminate\Support\Facades\Cache::remember('master_mekaniks', now()->addHour(), fn() => User::role('Mekanik')->get());
