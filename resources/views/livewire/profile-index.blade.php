@@ -153,8 +153,8 @@
                                 <p class="text-sm font-medium text-gray-900">Login Berhasil</p>
                                 <p class="text-xs text-gray-500">{{ $log->created_at->translatedFormat('d M Y, H:i') }} WIB</p>
                                 <div class="mt-1 flex items-center space-x-2 text-[10px] text-gray-400">
-                                    <span class="px-1.5 py-0.5 bg-gray-100 rounded">{{ $log->getExtraProperty('ip') ?? '0.0.0.0' }}</span>
-                                    <span class="truncate">{{ Str::limit($log->getExtraProperty('user_agent'), 30) }}</span>
+                                    <span class="px-1.5 py-0.5 bg-gray-100 rounded">{{ $log->properties['ip'] ?? '0.0.0.0' }}</span>
+                                    <span class="truncate">{{ Str::limit($log->properties['user_agent'] ?? '', 30) }}</span>
                                 </div>
                             </div>
                         </div>
