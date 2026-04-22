@@ -81,6 +81,8 @@ class KompiForm extends Component
             $message = 'Kompi baru berhasil ditambahkan.';
         }
 
+        \Illuminate\Support\Facades\Cache::forget('master_kompi');
+
         $this->showForm = false;
         $this->dispatch('kompiSaved', message: $message);
     }

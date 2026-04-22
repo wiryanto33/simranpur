@@ -119,6 +119,8 @@ class KendaraanForm extends Component
             $message = 'Kendaraan baru berhasil ditambahkan.';
         }
 
+        \Illuminate\Support\Facades\Cache::forget('master_kendaraan');
+
         $this->showForm = false;
         $this->dispatch('kendaraanSaved', message: $message);
     }

@@ -20,8 +20,10 @@
 
             <select wire:model.live="filterKompi" class="rounded-md border-gray-300 shadow-sm focus:border-[#2D5A45] focus:ring focus:ring-[#2D5A45] focus:ring-opacity-50 text-sm">
                 <option value="">Semua Kompi</option>
-                @foreach($kompiList as $kompi)
-                    <option value="{{ $kompi->id }}">{{ $kompi->nama }}</option>
+                @foreach(collect($kompiList) as $kompi)
+                    @if(is_object($kompi))
+                        <option value="{{ $kompi->id }}">{{ $kompi->nama }}</option>
+                    @endif
                 @endforeach
             </select>
         </div>

@@ -110,6 +110,9 @@ class SukuCadangForm extends Component
             $message = 'Suku cadang baru berhasil ditambahkan.';
         }
 
+        \Illuminate\Support\Facades\Cache::forget('master_suku_cadang');
+        \Illuminate\Support\Facades\Cache::forget('master_suku_cadang_available');
+
         $this->showForm = false;
         $this->dispatch('sukuCadangSaved', message: $message);
     }
