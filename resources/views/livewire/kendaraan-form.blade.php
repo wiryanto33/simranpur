@@ -41,10 +41,7 @@
                                     <label class="block text-sm font-medium text-gray-700">Jenis Kendaraan <span class="text-red-500">*</span></label>
                                     <select wire:model="jenis" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#2D5A45] focus:ring focus:ring-[#2D5A45] focus:ring-opacity-50">
                                         <option value="">-- Pilih Jenis --</option>
-                                        <option value="Tank Tempur Utama">Tank Tempur Utama (MBT)</option>
-                                        <option value="Tank Ringan">Tank Ringan</option>
-                                        <option value="Kendaraan Pendarat Amfibi">Kendaraan Pendarat Amfibi (LVT)</option>
-                                        <option value="Kendaraan Pengangkut Pasukan">Pengangkut Pasukan (APC)</option>
+                                        <option value="Tank Amfibi">Tank Amfibi</option>
                                     </select>
                                     @error('jenis') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                                 </div>

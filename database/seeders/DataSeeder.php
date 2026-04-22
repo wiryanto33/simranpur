@@ -109,30 +109,30 @@ class DataSeeder extends Seeder
         // =====================================================================
         $kendaraanData = [
             // Kompi Alfa (7 kendaraan)
-            ['nomor' => 'MBT-A-001', 'nama' => 'Tank Leopard 2A4',        'jenis' => 'Tank',              'tahun' => 2015, 'status' => 'Siap Tempur', 'kompi' => 0],
-            ['nomor' => 'MBT-A-002', 'nama' => 'Tank Leopard 2A4',        'jenis' => 'Tank',              'tahun' => 2015, 'status' => 'Siap Tempur', 'kompi' => 0],
-            ['nomor' => 'APC-A-001', 'nama' => 'Panser Anoa 6x6',         'jenis' => 'Panser',            'tahun' => 2018, 'status' => 'Siap Tempur', 'kompi' => 0],
-            ['nomor' => 'APC-A-002', 'nama' => 'Panser Anoa 6x6',         'jenis' => 'Panser',            'tahun' => 2019, 'status' => 'Standby',     'kompi' => 0],
-            ['nomor' => 'APC-A-003', 'nama' => 'Panser Anoa 4x4',         'jenis' => 'Panser',            'tahun' => 2017, 'status' => 'Perbaikan',   'kompi' => 0],
-            ['nomor' => 'KND-A-001', 'nama' => 'Kendaraan Taktis Maung',  'jenis' => 'Kendaraan Taktis',  'tahun' => 2021, 'status' => 'Siap Tempur', 'kompi' => 0],
-            ['nomor' => 'KND-A-002', 'nama' => 'Kendaraan Taktis Maung',  'jenis' => 'Kendaraan Taktis',  'tahun' => 2020, 'status' => 'Tidak Layak', 'kompi' => 0],
+            ['nomor' => 'MBT-A-001', 'nama' => 'Tank Leopard 2A4',        'jenis' => 'Tank Amfibi',        'tahun' => 2015, 'status' => 'Siap Tempur', 'kompi' => 0],
+            ['nomor' => 'MBT-A-002', 'nama' => 'Tank Leopard 2A4',        'jenis' => 'Tank Amfibi',        'tahun' => 2015, 'status' => 'Siap Tempur', 'kompi' => 0],
+            ['nomor' => 'APC-A-001', 'nama' => 'Panser Anoa 6x6',         'jenis' => 'Tank Amfibi',        'tahun' => 2018, 'status' => 'Siap Tempur', 'kompi' => 0],
+            ['nomor' => 'APC-A-002', 'nama' => 'Panser Anoa 6x6',         'jenis' => 'Tank Amfibi',        'tahun' => 2019, 'status' => 'Standby',     'kompi' => 0],
+            ['nomor' => 'APC-A-003', 'nama' => 'Panser Anoa 4x4',         'jenis' => 'Tank Amfibi',        'tahun' => 2017, 'status' => 'Perbaikan',   'kompi' => 0],
+            ['nomor' => 'KND-A-001', 'nama' => 'Kendaraan Taktis Maung',  'jenis' => 'Tank Amfibi',        'tahun' => 2021, 'status' => 'Siap Tempur', 'kompi' => 0],
+            ['nomor' => 'KND-A-002', 'nama' => 'Kendaraan Taktis Maung',  'jenis' => 'Tank Amfibi',        'tahun' => 2020, 'status' => 'Tidak Layak', 'kompi' => 0],
 
             // Kompi Bravo (7 kendaraan)
-            ['nomor' => 'MBT-B-001', 'nama' => 'Tank AMX-13',             'jenis' => 'Tank',              'tahun' => 2010, 'status' => 'Siap Tempur', 'kompi' => 1],
-            ['nomor' => 'MBT-B-002', 'nama' => 'Tank AMX-13',             'jenis' => 'Tank',              'tahun' => 2010, 'status' => 'Perbaikan',   'kompi' => 1],
-            ['nomor' => 'APC-B-001', 'nama' => 'Panser Anoa 6x6',         'jenis' => 'Panser',            'tahun' => 2016, 'status' => 'Siap Tempur', 'kompi' => 1],
-            ['nomor' => 'APC-B-002', 'nama' => 'Panser Stormer',          'jenis' => 'Panser',            'tahun' => 2014, 'status' => 'Standby',     'kompi' => 1],
-            ['nomor' => 'KND-B-001', 'nama' => 'Kendaraan Taktis Maung',  'jenis' => 'Kendaraan Taktis',  'tahun' => 2022, 'status' => 'Siap Tempur', 'kompi' => 1],
-            ['nomor' => 'KND-B-002', 'nama' => 'Kendaraan Angkut Personel', 'jenis' => 'Kendaraan Taktis', 'tahun' => 2019, 'status' => 'Siap Tempur', 'kompi' => 1],
-            ['nomor' => 'KND-B-003', 'nama' => 'Kendaraan Komando',       'jenis' => 'Kendaraan Taktis',  'tahun' => 2018, 'status' => 'Standby',     'kompi' => 1],
+            ['nomor' => 'MBT-B-001', 'nama' => 'Tank AMX-13',             'jenis' => 'Tank Amfibi',        'tahun' => 2010, 'status' => 'Siap Tempur', 'kompi' => 1],
+            ['nomor' => 'MBT-B-002', 'nama' => 'Tank AMX-13',             'jenis' => 'Tank Amfibi',        'tahun' => 2010, 'status' => 'Perbaikan',   'kompi' => 1],
+            ['nomor' => 'APC-B-001', 'nama' => 'Panser Anoa 6x6',         'jenis' => 'Tank Amfibi',        'tahun' => 2016, 'status' => 'Siap Tempur', 'kompi' => 1],
+            ['nomor' => 'APC-B-002', 'nama' => 'Panser Stormer',          'jenis' => 'Tank Amfibi',        'tahun' => 2014, 'status' => 'Standby',     'kompi' => 1],
+            ['nomor' => 'KND-B-001', 'nama' => 'Kendaraan Taktis Maung',  'jenis' => 'Tank Amfibi',        'tahun' => 2022, 'status' => 'Siap Tempur', 'kompi' => 1],
+            ['nomor' => 'KND-B-002', 'nama' => 'Kendaraan Angkut Personel', 'jenis' => 'Tank Amfibi',       'tahun' => 2019, 'status' => 'Siap Tempur', 'kompi' => 1],
+            ['nomor' => 'KND-B-003', 'nama' => 'Kendaraan Komando',       'jenis' => 'Tank Amfibi',        'tahun' => 2018, 'status' => 'Standby',     'kompi' => 1],
 
             // Kompi Charlie (6 kendaraan)
-            ['nomor' => 'MBT-C-001', 'nama' => 'Tank Scorpion',           'jenis' => 'Tank',              'tahun' => 2008, 'status' => 'Tidak Layak', 'kompi' => 2],
-            ['nomor' => 'APC-C-001', 'nama' => 'Panser Anoa 6x6',         'jenis' => 'Panser',            'tahun' => 2020, 'status' => 'Siap Tempur', 'kompi' => 2],
-            ['nomor' => 'APC-C-002', 'nama' => 'Panser Anoa 4x4',         'jenis' => 'Panser',            'tahun' => 2021, 'status' => 'Siap Tempur', 'kompi' => 2],
-            ['nomor' => 'KND-C-001', 'nama' => 'Kendaraan Taktis Maung',  'jenis' => 'Kendaraan Taktis',  'tahun' => 2023, 'status' => 'Siap Tempur', 'kompi' => 2],
-            ['nomor' => 'KND-C-002', 'nama' => 'Kendaraan Taktis Maung',  'jenis' => 'Kendaraan Taktis',  'tahun' => 2022, 'status' => 'Perbaikan',   'kompi' => 2],
-            ['nomor' => 'KND-C-003', 'nama' => 'Kendaraan Angkut Amunisi', 'jenis' => 'Kendaraan Taktis',  'tahun' => 2017, 'status' => 'Siap Tempur', 'kompi' => 2],
+            ['nomor' => 'MBT-C-001', 'nama' => 'Tank Scorpion',           'jenis' => 'Tank Amfibi',        'tahun' => 2008, 'status' => 'Tidak Layak', 'kompi' => 2],
+            ['nomor' => 'APC-C-001', 'nama' => 'Panser Anoa 6x6',         'jenis' => 'Tank Amfibi',        'tahun' => 2020, 'status' => 'Siap Tempur', 'kompi' => 2],
+            ['nomor' => 'APC-C-002', 'nama' => 'Panser Anoa 4x4',         'jenis' => 'Tank Amfibi',        'tahun' => 2021, 'status' => 'Siap Tempur', 'kompi' => 2],
+            ['nomor' => 'KND-C-001', 'nama' => 'Kendaraan Taktis Maung',  'jenis' => 'Tank Amfibi',        'tahun' => 2023, 'status' => 'Siap Tempur', 'kompi' => 2],
+            ['nomor' => 'KND-C-002', 'nama' => 'Kendaraan Taktis Maung',  'jenis' => 'Tank Amfibi',        'tahun' => 2022, 'status' => 'Perbaikan',   'kompi' => 2],
+            ['nomor' => 'KND-C-003', 'nama' => 'Kendaraan Angkut Amunisi', 'jenis' => 'Tank Amfibi',        'tahun' => 2017, 'status' => 'Siap Tempur', 'kompi' => 2],
         ];
 
         $kendaraans = [];

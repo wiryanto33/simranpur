@@ -61,7 +61,8 @@ class KendaraanForm extends Component
             abort(403, 'Akses ditolak.');
         }
         $this->resetValidation();
-        $this->reset(['kendaraan_id', 'nomor_ranpur', 'nama', 'jenis', 'tahun', 'kompi_id', 'keterangan', 'foto', 'fotoPrev']);
+        $this->reset(['kendaraan_id', 'nomor_ranpur', 'nama', 'tahun', 'kompi_id', 'keterangan', 'foto', 'fotoPrev']);
+        $this->jenis = 'Tank Amfibi';
         $this->status = 'Siap Tempur';
         $this->isEdit = false;
         $this->showForm = true;
