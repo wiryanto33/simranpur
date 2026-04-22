@@ -41,16 +41,7 @@ class LaporanPemeliharaan extends Component
             $query->where('status', $this->status);
         }
 
-        try {
-            $kendaraans = \Illuminate\Support\Facades\Cache::remember('master_kendaraan', now()->addDay(), fn() => Kendaraan::all());
-            if (!($kendaraans instanceof \Illuminate\Support\Collection)) {
-                \Illuminate\Support\Facades\Cache::forget('master_kendaraan');
-                $kendaraans = Kendaraan::all();
-            }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Cache::forget('master_kendaraan');
-            $kendaraans = Kendaraan::all();
-        }
+        $kendaraans = Kendaraan::orderBy('nomor_ranpur')->get();
 
         return view('livewire.laporan-pemeliharaan', [
             'jadwals' => $query->latest('tanggal')->get(),

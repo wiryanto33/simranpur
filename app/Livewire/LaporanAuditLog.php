@@ -41,16 +41,7 @@ class LaporanAuditLog extends Component
                   ->orWhere('subject_type', 'like', '%' . $this->search_modul . '%');
         }
 
-        try {
-            $users = \Illuminate\Support\Facades\Cache::remember('master_users_all', now()->addHour(), fn() => \App\Models\User::all());
-            if (!($users instanceof \Illuminate\Support\Collection)) {
-                \Illuminate\Support\Facades\Cache::forget('master_users_all');
-                $users = \App\Models\User::all();
-            }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Cache::forget('master_users_all');
-            $users = \App\Models\User::all();
-        }
+        $users = \App\Models\User::orderBy('name')->get();
 
         return view('livewire.laporan-audit-log', [
             'logs' => $query->latest()->paginate(20),

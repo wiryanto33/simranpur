@@ -92,18 +92,7 @@ class KendaraanIndex extends Component
         }
 
         $kendaraanList = $query->latest()->paginate(15);
-        
-        try {
-            $kompiList = \Illuminate\Support\Facades\Cache::remember('master_kompi', now()->addHour(), fn() => Kompi::all());
-            if (!($kompiList instanceof \Illuminate\Support\Collection)) {
-                \Illuminate\Support\Facades\Cache::forget('master_kompi');
-                $kompiList = Kompi::all();
-                \Illuminate\Support\Facades\Cache::put('master_kompi', $kompiList, now()->addHour());
-            }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Cache::forget('master_kompi');
-            $kompiList = Kompi::all();
-        }
+        $kompiList = Kompi::orderBy('nama')->get();
 
         return view('livewire.kendaraan-index', [
             'kendaraanList' => $kendaraanList,

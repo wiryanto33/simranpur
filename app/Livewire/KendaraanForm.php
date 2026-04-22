@@ -119,24 +119,13 @@ class KendaraanForm extends Component
             $message = 'Kendaraan baru berhasil ditambahkan.';
         }
 
-        \Illuminate\Support\Facades\Cache::forget('master_kendaraan');
-
         $this->showForm = false;
         $this->dispatch('kendaraanSaved', message: $message);
     }
 
     public function render()
     {
-        try {
-            $kompiList = \Illuminate\Support\Facades\Cache::remember('master_kompi', now()->addDay(), fn() => Kompi::all());
-            if (!($kompiList instanceof \Illuminate\Support\Collection)) {
-                \Illuminate\Support\Facades\Cache::forget('master_kompi');
-                $kompiList = Kompi::all();
-            }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Cache::forget('master_kompi');
-            $kompiList = Kompi::all();
-        }
+        $kompiList = Kompi::orderBy('nama')->get();
 
         return view('livewire.kendaraan-form', [
             'kompiList' => $kompiList

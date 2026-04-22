@@ -146,26 +146,9 @@ class LaporanKerusakanForm extends Component
     {
         $user = auth()->user();
         
-        $cacheKey = 'laporan_form_kendaraans_' . ($user->isOperator() ? 'op_' . $user->id : 'all');
-        
-        try {
-            $listKendaraan = \Illuminate\Support\Facades\Cache::remember($cacheKey, now()->addMinutes(15), function() use ($user) {
-                $query = $user->isOperator()
-                    ? Kendaraan::where('id', $user->kendaraan_tugas_id)
-                    : Kendaraan::where('status', 'Siap Tempur')->orderBy('nomor_ranpur');
-                    
-                return $query->get();
-            });
-
-            // Defensive check against __PHP_Incomplete_Class or corrupted cache
-            if (!($listKendaraan instanceof \Illuminate\Support\Collection)) {
-                \Illuminate\Support\Facades\Cache::forget($cacheKey);
-                $listKendaraan = collect();
-            }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Cache::forget($cacheKey);
-            $listKendaraan = collect();
-        }
+        $listKendaraan = $user->isOperator()
+            ? Kendaraan::where('id', $user->kendaraan_tugas_id)->get()
+            : Kendaraan::where('status', 'Siap Tempur')->orderBy('nomor_ranpur')->get();
 
         return view('livewire.laporan-kerusakan-form', [
             'kendaraans' => $listKendaraan,

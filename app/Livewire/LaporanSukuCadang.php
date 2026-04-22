@@ -6,7 +6,6 @@ use Livewire\Component;
 use App\Models\TransaksiSukuCadang;
 use App\Models\SukuCadang;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Cache;
 
 class LaporanSukuCadang extends Component
 {
@@ -41,16 +40,7 @@ class LaporanSukuCadang extends Component
             ->groupBy('jenis')
             ->pluck('total', 'jenis');
 
-        try {
-            $sukuCadangList = \Illuminate\Support\Facades\Cache::remember('master_suku_cadang', now()->addDay(), fn() => SukuCadang::all());
-            if (!($sukuCadangList instanceof \Illuminate\Support\Collection)) {
-                \Illuminate\Support\Facades\Cache::forget('master_suku_cadang');
-                $sukuCadangList = SukuCadang::all();
-            }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Cache::forget('master_suku_cadang');
-            $sukuCadangList = SukuCadang::all();
-        }
+        $sukuCadangList = SukuCadang::orderBy('nama')->get();
 
         return view('livewire.laporan-suku-cadang', [
             'transaksis' => $query->latest('tanggal')->get(),

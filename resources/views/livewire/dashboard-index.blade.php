@@ -98,7 +98,7 @@
                     <tbody class="bg-white divide-y divide-gray-100">
                         @forelse($todaySchedules as $js)
                         <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-3 whitespace-nowrap text-sm font-bold text-gray-900">{{ $js->kendaraan->nomor_ranpur }}</td>
+                            <td class="px-6 py-3 whitespace-nowrap text-sm font-bold text-gray-900">{{ $js->kendaraan?->nomor_ranpur ?? 'Ranpur Terhapus' }}</td>
                             <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-600">{{ $js->jenis_pemeliharaan }}</td>
                             <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                                 @foreach($js->mekanik as $m)
@@ -157,7 +157,7 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
                             <div class="w-8 h-8 rounded bg-red-100 flex items-center justify-center text-red-600 mr-3 text-xs font-bold">#{{ $loop->iteration }}</div>
-                            <span class="text-sm font-medium text-gray-700">{{ $tdv->kendaraan->nama }} ({{ $tdv->kendaraan->nomor_ranpur }})</span>
+                            <span class="text-sm font-medium text-gray-700">{{ $tdv->kendaraan?->nama ?? 'Ranpur Terhapus' }} ({{ $tdv->kendaraan?->nomor_ranpur ?? '-' }})</span>
                         </div>
                         <span class="text-sm font-bold text-red-600">{{ $tdv->total }} Kali</span>
                     </div>
@@ -187,7 +187,7 @@
                     @foreach($upcomingSchedules as $us)
                     <tr class="hover:bg-gray-50 transition-colors">
                         <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-600">{{ $us->tanggal->format('d M') }}</td>
-                        <td class="px-6 py-3 whitespace-nowrap text-sm font-bold text-gray-800">{{ $us->kendaraan->nomor_ranpur }}</td>
+                        <td class="px-6 py-3 whitespace-nowrap text-sm font-bold text-gray-800">{{ $us->kendaraan?->nomor_ranpur ?? 'Ranpur Terhapus' }}</td>
                         <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-600">{{ $us->jenis_pemeliharaan }}</td>
                         <td class="px-6 py-3 whitespace-nowrap text-sm">
                             <span class="px-2 py-0.5 rounded text-[10px] font-bold border border-yellow-200 bg-yellow-50 text-yellow-700">{{ $us->status }}</span>
@@ -215,7 +215,7 @@
                 @forelse($pendingVerification as $pv)
                 <div class="p-4 hover:bg-gray-50 flex justify-between items-center transition-colors">
                     <div>
-                        <div class="text-sm font-bold text-gray-900 block">{{ $pv->kendaraan->nomor_ranpur }} - {{ $pv->kendaraan->nama }}</div>
+                        <div class="text-sm font-bold text-gray-900 block">{{ $pv->kendaraan?->nomor_ranpur ?? 'Ranpur Terhapus' }} - {{ $pv->kendaraan?->nama ?? '-' }}</div>
                         <div class="text-xs text-gray-500 mt-1 line-clamp-1 italic">"{{ $pv->deskripsi }}"</div>
                     </div>
                     <a href="{{ route('laporan-kerusakan.index') }}" class="text-[10px] font-bold text-white bg-red-600 px-3 py-1.5 rounded-lg shadow-sm hover:bg-red-700">VERIFIKASI</a>
@@ -238,8 +238,8 @@
                 @forelse($pendingApproval as $pa)
                 <div class="p-4 hover:bg-gray-50 flex justify-between items-center transition-colors">
                     <div>
-                        <div class="text-sm font-bold text-gray-900">{{ $pa->laporanKerusakan->kendaraan->nomor_ranpur }}</div>
-                        <div class="text-xs text-gray-600 mt-1 uppercase font-medium">Mekanik: {{ $pa->mekanik->name }}</div>
+                        <div class="text-sm font-bold text-gray-900">{{ $pa->laporanKerusakan?->kendaraan?->nomor_ranpur ?? 'Ranpur Terhapus' }}</div>
+                        <div class="text-xs text-gray-600 mt-1 uppercase font-medium">Mekanik: {{ $pa->mekanik?->name ?? '-' }}</div>
                     </div>
                     <a href="{{ route('laporan-perbaikan.index') }}" class="text-[10px] font-bold text-white bg-yellow-600 px-3 py-1.5 rounded-lg shadow-sm hover:bg-yellow-700 uppercase">Periksa Hasil</a>
                 </div>
@@ -319,7 +319,7 @@
                 @foreach($sparepartUsage as $su)
                 <div>
                     <div class="flex justify-between items-center mb-1">
-                        <span class="text-sm font-medium text-gray-700">{{ $su->sukuCadang->nama }}</span>
+                        <span class="text-sm font-medium text-gray-700">{{ $su->sukuCadang->nama ?? 'Item Terhapus' }}</span>
                         <span class="text-sm font-bold text-gray-900">{{ $su->total }} Unit</span>
                     </div>
                     <div class="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">

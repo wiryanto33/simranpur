@@ -62,42 +62,24 @@ class DashboardIndex extends Component
 
     private function loadCommonStats()
     {
-        try {
-            $stats = \Illuminate\Support\Facades\Cache::remember('dashboard_common_stats', now()->addMinutes(15), function() {
-                $vehicleStats = Kendaraan::select('status', DB::raw('count(*) as total'))
-                    ->groupBy('status')
-                    ->pluck('total', 'status')
-                    ->toArray();
+        $vehicleStats = Kendaraan::select('status', DB::raw('count(*) as total'))
+            ->groupBy('status')
+            ->pluck('total', 'status')
+            ->toArray();
 
-                $statuses = ['Siap Tempur', 'Standby', 'Perbaikan', 'Tidak Layak'];
-                foreach ($statuses as $status) {
-                    if (!isset($vehicleStats[$status])) {
-                        $vehicleStats[$status] = 0;
-                    }
-                }
-
-                $totalVehicles = Kendaraan::count();
-                $fleetReadiness = $totalVehicles > 0 
-                    ? round(($vehicleStats['Siap Tempur'] / $totalVehicles) * 100)
-                    : 0;
-                    
-                return [
-                    'vehicleStats' => $vehicleStats,
-                    'fleetReadiness' => $fleetReadiness
-                ];
-            });
-
-            if (!is_array($stats) || !isset($stats['vehicleStats']) || !isset($stats['fleetReadiness'])) {
-                \Illuminate\Support\Facades\Cache::forget('dashboard_common_stats');
-                $stats = ['vehicleStats' => ['Siap Tempur' => 0, 'Standby' => 0, 'Perbaikan' => 0, 'Tidak Layak' => 0], 'fleetReadiness' => 0];
+        $statuses = ['Siap Tempur', 'Standby', 'Perbaikan', 'Tidak Layak'];
+        foreach ($statuses as $status) {
+            if (!isset($vehicleStats[$status])) {
+                $vehicleStats[$status] = 0;
             }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Cache::forget('dashboard_common_stats');
-            $stats = ['vehicleStats' => ['Siap Tempur' => 0, 'Standby' => 0, 'Perbaikan' => 0, 'Tidak Layak' => 0], 'fleetReadiness' => 0];
         }
 
-        $this->vehicleStats = $stats['vehicleStats'];
-        $this->fleetReadiness = $stats['fleetReadiness'];
+        $totalVehicles = Kendaraan::count();
+        $this->fleetReadiness = $totalVehicles > 0 
+            ? round(($vehicleStats['Siap Tempur'] / $totalVehicles) * 100)
+            : 0;
+            
+        $this->vehicleStats = $vehicleStats;
 
         $this->todaySchedules = JadwalPemeliharaan::with(['kendaraan', 'mekanik'])
             ->whereDate('tanggal', today())
@@ -106,40 +88,16 @@ class DashboardIndex extends Component
 
     private function loadAdminStats()
     {
-        try {
-            $this->readinessHistory = \Illuminate\Support\Facades\Cache::remember('dashboard_admin_readiness', now()->addHour(), function() {
-                return [
-                    'labels' => collect(range(29, 0))->reverse()->map(fn($d) => now()->subDays($d)->format('d M'))->values()->toArray(),
-                    'data' => collect(range(29, 0))->map(fn($d) => rand(70, 95))->values()->toArray(), 
-                ];
-            });
-            if (!is_array($this->readinessHistory)) {
-                 \Illuminate\Support\Facades\Cache::forget('dashboard_admin_readiness');
-                 $this->readinessHistory = ['labels' => [], 'data' => []];
-            }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Cache::forget('dashboard_admin_readiness');
-            $this->readinessHistory = ['labels' => [], 'data' => []];
-        }
+        $this->readinessHistory = [
+            'labels' => collect(range(29, 0))->reverse()->map(fn($d) => now()->subDays($d)->format('d M'))->values()->toArray(),
+            'data' => collect(range(29, 0))->map(fn($d) => rand(70, 95))->values()->toArray(), 
+        ];
 
-        try {
-            $monthStats = \Illuminate\Support\Facades\Cache::remember('dashboard_admin_month_stats', now()->addMinutes(30), function() {
-                return [
-                    'total' => LaporanKerusakan::whereMonth('tanggal', now()->month)->count(),
-                    'selesai' => LaporanKerusakan::whereMonth('tanggal', now()->month)->where('status', 'Selesai')->count(),
-                    'pending' => LaporanKerusakan::whereMonth('tanggal', now()->month)->whereIn('status', ['Pending', 'Proses'])->count(),
-                ];
-            });
-            if (!is_array($monthStats)) {
-                \Illuminate\Support\Facades\Cache::forget('dashboard_admin_month_stats');
-                $monthStats = ['total' => 0, 'selesai' => 0, 'pending' => 0];
-            }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Cache::forget('dashboard_admin_month_stats');
-            $monthStats = ['total' => 0, 'selesai' => 0, 'pending' => 0];
-        }
-        
-        $this->damageRecap = $monthStats;
+        $this->damageRecap = [
+            'total' => LaporanKerusakan::whereMonth('tanggal', now()->month)->count(),
+            'selesai' => LaporanKerusakan::whereMonth('tanggal', now()->month)->where('status', 'Selesai')->count(),
+            'pending' => LaporanKerusakan::whereMonth('tanggal', now()->month)->whereIn('status', ['Pending', 'Proses'])->count(),
+        ];
 
         $this->topDamagedVehicles = LaporanKerusakan::select('kendaraan_id', DB::raw('count(*) as total'))
             ->with('kendaraan:id,nama,nomor_ranpur')

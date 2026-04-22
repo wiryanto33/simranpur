@@ -179,28 +179,8 @@ class JadwalIndex extends Component
 
     public function render()
     {
-        // Hardening Cache Retrieval
-        try {
-            $mekaniks = \Illuminate\Support\Facades\Cache::remember('master_mekaniks', now()->addHour(), fn() => User::role('Mekanik')->get());
-            if (!($mekaniks instanceof \Illuminate\Support\Collection)) {
-                \Illuminate\Support\Facades\Cache::forget('master_mekaniks');
-                $mekaniks = User::role('Mekanik')->get();
-            }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Cache::forget('master_mekaniks');
-            $mekaniks = User::role('Mekanik')->get();
-        }
-
-        try {
-            $kendaraans = \Illuminate\Support\Facades\Cache::remember('master_kendaraan', now()->addDay(), fn() => Kendaraan::all());
-            if (!($kendaraans instanceof \Illuminate\Support\Collection)) {
-                \Illuminate\Support\Facades\Cache::forget('master_kendaraan');
-                $kendaraans = Kendaraan::all();
-            }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Cache::forget('master_kendaraan');
-            $kendaraans = Kendaraan::all();
-        }
+        $mekaniks = User::role('Mekanik')->get();
+        $kendaraans = Kendaraan::orderBy('nomor_ranpur')->get();
 
         return view('livewire.jadwal-index', [
             'jadwalList' => $this->buildQuery()->paginate(10),

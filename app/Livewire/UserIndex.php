@@ -81,19 +81,7 @@ class UserIndex extends Component
             });
         }
 
-        try {
-            $roles = \Illuminate\Support\Facades\Cache::remember('roles_all', now()->addDay(), function() {
-                return \Spatie\Permission\Models\Role::all();
-            });
-
-            if (!($roles instanceof \Illuminate\Support\Collection)) {
-                \Illuminate\Support\Facades\Cache::forget('roles_all');
-                $roles = \Spatie\Permission\Models\Role::all();
-            }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Cache::forget('roles_all');
-            $roles = \Spatie\Permission\Models\Role::all();
-        }
+        $roles = \Spatie\Permission\Models\Role::orderBy('name')->get();
 
         return view('livewire.user-index', [
             'users' => $query->latest()->paginate(10),

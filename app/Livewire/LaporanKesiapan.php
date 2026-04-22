@@ -6,7 +6,6 @@ use Livewire\Component;
 use App\Models\Kendaraan;
 use App\Models\Kompi;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Cache;
 
 class LaporanKesiapan extends Component
 {
@@ -42,16 +41,7 @@ class LaporanKesiapan extends Component
             $stats[$s] = $statsCollection[$s] ?? 0;
         }
 
-        try {
-            $kompis = \Illuminate\Support\Facades\Cache::remember('master_kompi', now()->addDay(), fn() => Kompi::all());
-            if (!($kompis instanceof \Illuminate\Support\Collection)) {
-                \Illuminate\Support\Facades\Cache::forget('master_kompi');
-                $kompis = Kompi::all();
-            }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Cache::forget('master_kompi');
-            $kompis = Kompi::all();
-        }
+        $kompis = Kompi::orderBy('nama')->get();
 
         return view('livewire.laporan-kesiapan', [
             'kendaraans' => $kendaraans,

@@ -66,18 +66,7 @@ class SukuCadangIndex extends Component
             $query->whereColumn('stok', '<=', 'stok_minimum');
         }
 
-        try {
-            $totalMenipis = \Illuminate\Support\Facades\Cache::remember('total_stok_menipis', now()->addMinutes(15), function() {
-                return SukuCadang::whereColumn('stok', '<=', 'stok_minimum')->count();
-            });
-            if (!is_numeric($totalMenipis)) {
-                \Illuminate\Support\Facades\Cache::forget('total_stok_menipis');
-                $totalMenipis = SukuCadang::whereColumn('stok', '<=', 'stok_minimum')->count();
-            }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Cache::forget('total_stok_menipis');
-            $totalMenipis = SukuCadang::whereColumn('stok', '<=', 'stok_minimum')->count();
-        }
+        $totalMenipis = SukuCadang::whereColumn('stok', '<=', 'stok_minimum')->count();
 
         return view('livewire.suku-cadang-index', [
             'items' => $query->orderBy('nama')->paginate(12),
