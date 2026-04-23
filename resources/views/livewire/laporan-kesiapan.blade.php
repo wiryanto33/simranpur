@@ -16,7 +16,7 @@
             <div>
                 <x-input-label for="kompi" value="Satuan (Kompi)" />
                 <select wire:model.live="kompi_id" id="kompi" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-[#1B3A2D] focus:ring-[#1B3A2D]">
-                    <option value="">Semua Satuan</option>
+                    <option value="">Semua Kompi</option>
                     @foreach(collect($kompis) as $k)
                         @if(is_object($k))
                             <option value="{{ $k->id }}">{{ $k->nama }}</option>
@@ -58,7 +58,7 @@
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nomor Ranpur</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Satuan</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kompi</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
             </x-slot>
             <x-slot name="body">
