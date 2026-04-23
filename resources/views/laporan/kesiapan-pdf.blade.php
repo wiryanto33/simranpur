@@ -21,10 +21,10 @@
 </head>
 <body>
     <div class="header">
-        <img src="{{ public_path('images/logo_tnial.png') }}" class="logo" onerror="this.style.display='none'">
+        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('logo/tank.png'))) }}" class="logo">
         <div class="title">KORPS MARINIR TNI AL</div>
         <div class="subtitle">{{ auth()->user()->kompi->nama ?? 'KOMPI PELAKSANA' }}</div>
-        <hr style="border: 1px solid #000; margin-top: 10px;">
+        <hr style="border: 1px solid #000; margin-top: 22px;">
         <h2 style="text-decoration: underline; margin-top: 20px;">LAPORAN KESIAPAN KENDARAAN TEMPUR</h2>
         <p>Periode: {{ now()->format('d F Y') }}</p>
     </div>
