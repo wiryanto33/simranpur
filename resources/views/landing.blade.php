@@ -15,8 +15,8 @@
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center flex-shrink-0 gap-3">
-                    <div class="flex items-center justify-center w-12 h-12">
-                        <img src="{{ asset('logo/marinir.png') }}" alt="Logo" class="object-contain w-11 h-11 drop-shadow-md">
+                    <div class="flex items-center justify-center w-20 h-20">
+                        <img src="{{ asset('logo/tank.png') }}" alt="Logo" class="object-contain w-20 h-20 drop-shadow-md">
                     </div>
                     <div>
                         <h1 class="text-xl font-bold leading-tight text-[#1B3A2D]">SIMRANPUR</h1>
@@ -114,7 +114,7 @@
                 <span class="text-sm">&copy; {{ date('Y') }} Korps Marinir TNI AL. Hak Cipta Dilindungi.</span>
             </div>
             <div class="mt-8 flex justify-center md:mt-0 md:order-1 items-center gap-2">
-                <img src="{{ asset('logo/marinir.png') }}" alt="Logo" class="object-contain w-8 h-8">
+                <img src="{{ asset('logo/tank.png') }}" alt="Logo" class="object-contain w-8 h-8">
                 <span class="text-white font-bold text-lg">SIMRANPUR</span>
             </div>
         </div>

@@ -23,7 +23,7 @@
     <div class="header">
         <img src="{{ public_path('images/logo_tnial.png') }}" class="logo" onerror="this.style.display='none'">
         <div class="title">KORPS MARINIR TNI AL</div>
-        <div class="subtitle">{{ auth()->user()->kompi->nama ?? 'SATUAN PELAKSANA' }}</div>
+        <div class="subtitle">{{ auth()->user()->kompi->nama ?? 'KOMPI PELAKSANA' }}</div>
         <hr style="border: 1px solid #000; margin-top: 10px;">
         <h2 style="text-decoration: underline; margin-top: 20px;">LAPORAN KESIAPAN KENDARAAN TEMPUR</h2>
         <p>Periode: {{ now()->format('d F Y') }}</p>
@@ -36,7 +36,7 @@
                 <th>NOMOR RANPUR</th>
                 <th>NAMA KENDARAAN</th>
                 <th>JENIS</th>
-                <th>SATUAN</th>
+                <th>KOMPI</th>
                 <th>STATUS KESIAPAN</th>
                 <th>KETERANGAN</th>
             </tr>
@@ -64,7 +64,7 @@
                 <td width="60%"></td>
                 <td class="ttd-box">
                     <p>Jakarta, {{ now()->format('d F Y') }}</p>
-                    <p style="margin-bottom: 60px;">KOMANDAN SATUAN,</p>
+                    <p style="margin-bottom: 60px;">KOMANDAN KOMPI,</p>
                     <p style="text-decoration: underline; font-weight: bold;">( ............................................ )</p>
                     <p>PANGKAT / NRP</p>
                 </td>

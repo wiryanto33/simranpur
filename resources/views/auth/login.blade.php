@@ -10,11 +10,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased bg-[#F0F2F0]">
-    <div class="flex items-center justify-center min-h-screen px-4 bg-[#1B3A2D]/5 sm:px-6 lg:px-8 bg-cover bg-center" style="background-image: url('https://cdn.pixabay.com/photo/2021/11/02/09/27/tank-6762624_1280.jpg'); background-blend-mode: overlay; background-color: rgba(240,242,240,0.85);">
+    <div class="flex items-center justify-center min-h-screen px-4 bg-[#1B3A2D]/5 sm:px-6 lg:px-8 bg-cover bg-center" style="background-image: url('{{ asset('image/background.jpg') }}'); background-blend-mode: overlay; background-color: rgba(240,242,240,0.85);">
         <div class="w-full max-w-md p-8 space-y-8 bg-white shadow-xl rounded-xl ring-1 ring-gray-900/5">
             <div class="text-center">
-                <div class="flex items-center justify-center mx-auto w-24 h-24 mb-4">
-                    <img src="{{ asset('logo/marinir.png') }}" alt="Logo Marinir" class="object-contain w-full h-full drop-shadow-lg">
+                <div class="flex items-center justify-center mx-auto w-20 h-20 mb-4">
+                    <img src="{{ asset('logo/tank.png') }}" alt="Logo Marinir" class="object-contain w-full h-full drop-shadow-lg">
                 </div>
                 <h2 class="mt-6 text-3xl font-extrabold text-gray-900">SIMRANPUR</h2>
                 <p class="mt-2 text-sm font-semibold tracking-wider text-[#C8A84B] uppercase">Korps Marinir TNI AL</p>
@@ -44,12 +44,6 @@
                         <input id="remember_me" name="remember" type="checkbox" class="w-4 h-4 text-[#1B3A2D] border-gray-300 rounded focus:ring-[#C8A84B]">
                         <label for="remember_me" class="block ml-2 text-sm text-gray-700"> Ingat saya </label>
                     </div>
-
-                    @if (Route::has('password.request'))
-                        <div class="text-sm">
-                            <a href="{{ route('password.request') }}" class="font-medium text-[#1B3A2D] hover:text-[#C8A84B]"> Lupa password? </a>
-                        </div>
-                    @endif
                 </div>
 
                 <div>

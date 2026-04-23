@@ -36,7 +36,7 @@
 <body>
     <div class="header-wrapper">
         <div style="display: flex; align-items: center; justify-content: flex-start; gap: 15px;">
-            <img src="{{ public_path('logo/marinir.png') }}" style="width: 50px; height: auto;" />
+            <img src="{{ public_path('logo/tank.png') }}" style="width: 50px; height: auto;" />
             <div class="header-text">
                 <h1>Batalyon Kendaraan Tempur — Korps Marinir TNI AL</h1>
                 <h2>Sistem Informasi Manajemen Ranpur (SIMRANPUR)</h2>

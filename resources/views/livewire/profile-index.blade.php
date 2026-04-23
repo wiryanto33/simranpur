@@ -168,7 +168,7 @@
             <!-- Kartu Role -->
             <div class="bg-gradient-to-br from-[#1B3A2D] to-[#2D5A45] rounded-xl p-6 shadow-md text-white">
                 <div class="flex items-center space-x-4 mb-4">
-                    <img src="{{ asset('logo/marinir.png') }}" alt="Marinir" class="w-10 h-10 object-contain brightness-0 invert">
+                    <img src="{{ asset('logo/tank.png') }}" alt="Marinir" class="w-10 h-10 object-contain brightness-0 invert">
                     <div>
                         <p class="text-[10px] uppercase font-bold text-[#C8A84B] tracking-wider">Jabatan & Role</p>
                         <p class="text-sm font-semibold">{{ auth()->user()->detail->jabatan ?? '-' }}</p>

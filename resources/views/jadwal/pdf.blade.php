@@ -85,7 +85,7 @@
 </head>
 <body>
     <div class="header">
-        <img src="{{ public_path('logo/marinir.png') }}" style="width: 60px; height: auto; margin-bottom: 5px;" />
+        <img src="{{ public_path('logo/tank.png') }}" style="width: 60px; height: auto; margin-bottom: 5px;" />
         <h2>KORPS MARINIR TNI AL</h2>
         <p>PASUKAN MARINIR I - BATALYON KENDARAAN PENDARAT AMFIBI 1 MARINIR</p>
     </div>
