@@ -54,7 +54,7 @@
                 @foreach($jadwals as $j)
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $j->tanggal->format('d/m/Y') }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">{{ $j->kendaraan->nomor_ranpur }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">{{ $j->kendaraan->nomor_ranpur ?? 'N/A' }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ $j->jenis_pemeliharaan }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {{ $j->mekanik->pluck('name')->implode(', ') }}

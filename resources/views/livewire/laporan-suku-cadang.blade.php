@@ -59,14 +59,14 @@
                 @foreach($transaksis as $t)
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $t->tanggal->format('d/m/Y') }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">{{ $t->sukuCadang->nama }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">{{ $t->sukuCadang->nama ?? 'Suku Cadang Terhapus' }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <span class="px-2 py-0.5 rounded text-[10px] font-bold {{ $t->jenis == 'in' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700' }}">
                             {{ $t->jenis == 'in' ? 'MASUK' : 'KELUAR' }}
                         </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-bold {{ $t->jenis == 'in' ? 'text-green-600' : 'text-orange-600' }}">
-                        {{ $t->jenis == 'in' ? '+' : '-' }}{{ $t->jumlah }} {{ $t->sukuCadang->satuan }}
+                        {{ $t->jenis == 'in' ? '+' : '-' }}{{ $t->jumlah }} {{ $t->sukuCadang->satuan ?? '' }}
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-500 italic">{{ $t->keterangan ?? '-' }}</td>
                 </tr>
