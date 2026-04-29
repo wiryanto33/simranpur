@@ -102,6 +102,7 @@
                     <div>
                         <p class="text-gray-500">Unit Ranpur</p>
                         <p class="font-semibold">{{ $activePermintaan->laporanKerusakan?->kendaraan?->nama ?? '-' }}</p>
+                        <p class="text-xs text-gray-500">{{ $activePermintaan->laporanKerusakan?->kendaraan?->nomor_ranpur ?? '-' }}</p>
                     </div>
                     <div>
                         <p class="text-gray-500">Status</p>
