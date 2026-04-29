@@ -110,7 +110,7 @@
                                     </div>
                                     <div class="ml-4">
                                         <div class="text-sm font-bold text-gray-900">{{ $item->kendaraan->nama ?? '-' }}</div>
-                                        <div class="text-xs text-gray-500">{{ $item->kendaraan->no_register ?? '-' }}</div>
+                                        <div class="text-xs text-gray-500">{{ $item->kendaraan->nomor_ranpur ?? '-' }}</div>
                                     </div>
                                 </div>
                             </td>

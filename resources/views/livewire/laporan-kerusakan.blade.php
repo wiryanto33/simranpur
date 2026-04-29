@@ -60,7 +60,10 @@
                 @foreach($kerusakans as $k)
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $k->tanggal->format('d/m/Y') }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">{{ $k->kendaraan->nomor_ranpur ?? 'N/A' }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-bold text-gray-900">{{ $k->kendaraan->nama ?? '-' }}</div>
+                        <div class="text-xs text-gray-500">{{ $k->kendaraan->nomor_ranpur ?? '-' }}</div>
+                    </td>
                     <td class="px-6 py-4 text-sm text-gray-700">{{ Str::limit($k->deskripsi, 50) }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <x-badge color="red">{{ $k->status }}</x-badge>

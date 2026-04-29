@@ -40,7 +40,7 @@
                     @forelse($requests as $req)
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-bold text-gray-900">{{ $req->laporanKerusakan->kendaraan->nama ?? '-' }}</div>
+                                <div class="text-sm font-bold text-gray-900">{{ $req->laporanKerusakan?->kendaraan?->nama ?? '-' }}</div>
                                 <div class="text-xs text-gray-500">Mekanik: {{ $req->mekanik->name }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
@@ -101,7 +101,7 @@
                     </div>
                     <div>
                         <p class="text-gray-500">Unit Ranpur</p>
-                        <p class="font-semibold">{{ $activePermintaan->laporanKerusakan->kendaraan->nama }}</p>
+                        <p class="font-semibold">{{ $activePermintaan->laporanKerusakan?->kendaraan?->nama ?? '-' }}</p>
                     </div>
                     <div>
                         <p class="text-gray-500">Status</p>
