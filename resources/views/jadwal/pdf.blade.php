@@ -202,7 +202,7 @@
     </div>
 
     <div style="position: fixed; bottom: 0; width: 100%; text-align: right; font-size: 8px; color: #aaa;">
-        Dicetak otomatis oleh Sistem SIMRANPUR pada {{ date('d/m/Y H:i:s') }}
+        Dicetak otomatis oleh Sistem Simhar-Ranpur pada {{ date('d/m/Y H:i:s') }}
     </div>
 </body>
 </html>

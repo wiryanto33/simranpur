@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login - SIMRANPUR</title>
+    <title>Login - Simhar-Ranpur</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -16,7 +16,7 @@
                 <div class="flex items-center justify-center mx-auto w-20 h-20 mb-4">
                     <img src="{{ asset('logo/tank.png') }}" alt="Logo Marinir" class="object-contain w-full h-full drop-shadow-lg">
                 </div>
-                <h2 class="mt-6 text-3xl font-extrabold text-gray-900">SIMRANPUR</h2>
+                <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Simhar-Ranpur</h2>
                 <p class="mt-2 text-sm font-semibold tracking-wider text-[#C8A84B] uppercase">Korps Marinir TNI AL</p>
                 <p class="mt-1 text-sm text-gray-500">Sistem Informasi Pemeliharaan Kendaraan Tempur</p>
             </div>

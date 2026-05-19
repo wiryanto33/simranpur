@@ -5,7 +5,7 @@
                 Pusat Notifikasi
             </h2>
             <p class="mt-1 text-sm text-gray-500">
-                Lihat semua pembaruan dan pemberitahuan aktivitas Anda di SIMRANPUR.
+                Lihat semua pembaruan dan pemberitahuan aktivitas Anda di Simhar-Ranpur.
             </p>
         </div>
         <div class="flex mt-4 md:mt-0 md:ml-4 gap-3 border-b border-gray-200">
@@ -70,7 +70,7 @@
                                 </p>
                             </div>
                         </div>
-                        
+
                         <div class="ml-4 flex-shrink-0 flex flex-col items-end whitespace-nowrap">
                             <p class="text-sm text-gray-500 mb-2">
                                 <time datetime="{{ $notification->created_at->toIso8601String() }}">
@@ -100,7 +100,7 @@
                 </li>
             @endforelse
         </ul>
-        
+
         @if($notifications->hasPages())
             <div class="px-4 py-3 border-t border-gray-200 sm:px-6">
                 {{ $notifications->links() }}

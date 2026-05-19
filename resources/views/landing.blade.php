@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SIMRANPUR - Korps Marinir TNI AL</title>
+    <title>Simhar-Ranpur - Korps Marinir TNI AL</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -19,7 +19,7 @@
                         <img src="{{ asset('logo/tank.png') }}" alt="Logo" class="object-contain w-20 h-20 drop-shadow-md">
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold leading-tight text-[#1B3A2D]">SIMRANPUR</h1>
+                        <h1 class="text-xl font-bold leading-tight text-[#1B3A2D]">Simhar-Ranpur</h1>
                         <span class="text-xs font-semibold tracking-wider text-[#C8A84B] uppercase">Korps Marinir</span>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
             </div>
             <div class="mt-8 flex justify-center md:mt-0 md:order-1 items-center gap-2">
                 <img src="{{ asset('logo/tank.png') }}" alt="Logo" class="object-contain w-8 h-8">
-                <span class="text-white font-bold text-lg">SIMRANPUR</span>
+                <span class="text-white font-bold text-lg">Simhar-Ranpur</span>
             </div>
         </div>
     </footer>

@@ -39,7 +39,7 @@
             <img src="{{ public_path('logo/tank.png') }}" style="width: 50px; height: auto;" />
             <div class="header-text">
                 <h1>Batalyon Kendaraan Tempur — Korps Marinir TNI AL</h1>
-                <h2>Sistem Informasi Manajemen Ranpur (SIMRANPUR)</h2>
+                <h2>Sistem Informasi Manajemen Ranpur (Simhar-Ranpur)</h2>
             </div>
         </div>
         <div class="header-right">
@@ -150,7 +150,7 @@
     </div>
 
     <div class="footer">
-        Dokumen dicetak otomatis oleh <strong>SIMRANPUR</strong> — Sistem Informasi Manajemen Ranpur Korps Marinir TNI AL
+        Dokumen dicetak otomatis oleh <strong>Simhar-Ranpur</strong> — Sistem Informasi Manajemen Ranpur Korps Marinir TNI AL
     </div>
 </body>
 </html>

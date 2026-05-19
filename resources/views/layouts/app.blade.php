@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'SIMRANPUR') }}</title>
+    <title>{{ config('app.name', 'Simhar-Ranpur') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -25,11 +25,11 @@
                 this.sidebarOpen = !this.sidebarOpen;
             }
         }
-    }" 
+    }"
     x-init="$watch('sidebarCollapsed', val => localStorage.setItem('sidebarCollapsed', val))"
 >
     <div class="flex h-screen overflow-hidden">
-        
+
         <!-- Sidebar -->
         @include('layouts.partials.sidebar')
 

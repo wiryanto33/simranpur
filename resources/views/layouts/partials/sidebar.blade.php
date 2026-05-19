@@ -3,7 +3,7 @@
 
 <!-- Sidebar -->
 <aside :class="sidebarCollapsed ? 'w-16' : 'w-64'" class="fixed inset-y-0 left-0 z-30 flex flex-col pt-0 transition-all duration-300 transform bg-[#1B3A2D] lg:static lg:translate-x-0" :class="{'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen}">
-    
+
     <!-- Sidebar Header -->
     <div class="flex items-center justify-between h-16 px-4 bg-[#1B3A2D] shadow-sm">
         <div class="flex items-center space-x-3 overflow-hidden">
@@ -11,12 +11,12 @@
                 <img src="{{ asset('logo/tank.png') }}" alt="Logo Marinir" class="object-contain w-full h-full drop-shadow-md">
             </div>
             <div class="flex flex-col flex-1 min-w-0" x-show="!sidebarCollapsed" x-transition>
-                <h1 class="text-lg font-bold text-white truncate">SIMRANPUR</h1>
+                <h1 class="text-lg font-bold text-white truncate">Simhar-Ranpur</h1>
                 <p class="text-xs font-medium text-[#C8A84B] truncate">Korps Marinir TNI AL</p>
             </div>
         </div>
     </div>
-    
+
     <!-- Separator -->
     <div class="h-px bg-[#C8A84B]/30 mx-4 my-2"></div>
 
@@ -62,7 +62,7 @@
         <!-- Grup Utama -->
         <div class="mb-4" x-data="{ open: true }">
             <p x-show="!sidebarCollapsed" class="px-3 mb-2 text-xs font-semibold tracking-wider text-[#C8A84B] uppercase">Utama</p>
-            
+
             <a href="{{ route('dashboard') ?? '#' }}" class="relative flex items-center px-3 py-2 text-sm font-medium transition-colors rounded-md {{ request()->routeIs('dashboard') ? 'bg-[#2D5A45] text-white border-l-4 border-[#C8A84B]' : 'text-gray-300 hover:bg-[#2D5A45] hover:text-white border-l-4 border-transparent' }}" title="Dashboard">
                 <svg class="flex-shrink-0 w-5 h-5 mr-3 {{ request()->routeIs('dashboard') ? 'text-[#C8A84B]' : 'text-gray-400 group-hover:text-white' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -74,7 +74,7 @@
         <!-- Grup Operasional -->
         <div class="mb-4">
             <p x-show="!sidebarCollapsed" class="px-3 mb-2 text-xs font-semibold tracking-wider text-[#C8A84B] uppercase">Operasional</p>
-            
+
             @can('view_kendaraan')
             <a href="{{ route('kendaraan.index') }}" class="relative flex items-center px-3 py-2 text-sm font-medium transition-colors rounded-md {{ request()->routeIs('kendaraan.*') ? 'bg-[#2D5A45] text-white border-l-4 border-[#C8A84B]' : 'text-gray-300 hover:bg-[#2D5A45] hover:text-white border-l-4 border-transparent' }}" title="Kendaraan Tempur">
                 <svg class="flex-shrink-0 w-5 h-5 mr-3 {{ request()->routeIs('kendaraan.*') ? 'text-[#C8A84B]' : 'text-gray-400 group-hover:text-white' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -198,7 +198,7 @@
         @can('view_suku_cadang')
         <div class="mb-4">
             <p x-show="!sidebarCollapsed" class="px-3 mb-2 text-xs font-semibold tracking-wider text-[#C8A84B] uppercase">Logistik</p>
-            
+
             <a href="{{ route('suku-cadang.index') }}" class="relative flex items-center px-3 py-2 text-sm font-medium text-gray-300 transition-colors border-l-4 {{ request()->routeIs('suku-cadang.*') ? 'border-[#C8A84B] bg-[#2D5A45] text-white' : 'border-transparent hover:bg-[#2D5A45] hover:text-white' }} rounded-md" title="Suku Cadang">
                 <svg class="flex-shrink-0 w-5 h-5 mr-3 {{ request()->routeIs('suku-cadang.*') ? 'text-[#C8A84B]' : 'text-gray-400' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
@@ -224,12 +224,12 @@
             @endcan
         </div>
         @endcan
-        
+
         <!-- Grup Sistem -->
         @role('Admin')
         <div class="mb-4">
             <p x-show="!sidebarCollapsed" class="px-3 mb-2 text-xs font-semibold tracking-wider text-[#C8A84B] uppercase">Sistem</p>
-            
+
             <a href="{{ route('kompi.index') }}" class="relative flex items-center px-3 py-2 text-sm font-medium text-gray-300 transition-colors border-l-4 {{ request()->routeIs('kompi.*') ? 'border-[#C8A84B] bg-[#2D5A45] text-white' : 'border-transparent hover:bg-[#2D5A45] hover:text-white' }} rounded-md" title="Data Kompi">
                 <svg class="flex-shrink-0 w-5 h-5 mr-3 {{ request()->routeIs('kompi.*') ? 'text-[#C8A84B]' : 'text-gray-400' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
