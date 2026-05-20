@@ -125,7 +125,9 @@ class DashboardIndex extends Component
             ->latest()
             ->get();
 
-        $this->mechanicWorkload = User::role('Mekanik')
+        $this->mechanicWorkload = User::whereHas('roles', function($q) {
+                $q->where('name', 'Mekanik');
+            })
             ->withCount(['laporanPerbaikan as active_jobs' => function($q) {
                 $q->whereIn('status', ['Proses', 'Menunggu Approval']);
             }])
