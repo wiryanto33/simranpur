@@ -71,7 +71,7 @@
                                                 @if(is_object($m))
                                                     <label class="flex items-center space-x-2 text-sm cursor-pointer hover:bg-gray-50 p-1 rounded">
                                                         <input type="checkbox" wire:model="mekanik_ids" value="{{ $m->id }}" class="rounded border-gray-300 text-[#1B3A2D] focus:ring-[#1B3A2D]">
-                                                        <span class="text-gray-700">{{ $m->name }}</span>
+                                                        <span class="text-gray-700">{{ $m->nama }}</span>
                                                     </label>
                                                 @endif
                                             @endforeach

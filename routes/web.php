@@ -21,6 +21,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('laporan-perbaikan', \App\Http\Controllers\LaporanPerbaikanController::class);
     Route::get('/laporan-perbaikan/{id}/cetak-pdf', [\App\Http\Controllers\LaporanPerbaikanController::class, 'cetakPdf'])->name('laporan-perbaikan.cetak-pdf');
     Route::get('/users', [\App\Http\Controllers\UserController::class, 'index'])->name('user.index');
+    Route::get('/mekanik', function () {
+        return view('mekanik.index');
+    })->name('mekanik.index')->middleware('permission:view_mekanik');
     Route::get('/notifications', \App\Livewire\NotificationIndex::class)->name('notifications.index');
     Route::get('/permintaan-suku-cadang', [\App\Http\Controllers\PermintaanSukuCadangController::class, 'index'])->name('permintaan-suku-cadang.index');
     Route::get('/roles', [\App\Http\Controllers\RoleController::class, 'index'])->name('role.index');

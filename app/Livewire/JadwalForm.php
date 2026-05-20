@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\JadwalPemeliharaan;
 use App\Models\Kendaraan;
-use App\Models\User;
+use App\Models\Mekanik;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class JadwalForm extends Component
@@ -33,8 +33,8 @@ class JadwalForm extends Component
             'tanggal' => 'required|date',
             'estimasi_hari' => 'required|integer|min:1',
             'jenis_pemeliharaan' => 'required|string|max:255',
-            'mekanik_ids' => 'required|array|min:1',
-            'mekanik_ids.*' => 'exists:users,id',
+            'mekanik_ids'   => 'required|array|min:1',
+            'mekanik_ids.*' => 'exists:mekanik,id',
             'keterangan' => 'nullable|string',
             'status' => 'required|string',
             'checklist' => 'array',
@@ -138,7 +138,7 @@ class JadwalForm extends Component
 
     public function render()
     {
-        $mekaniks = User::role('Mekanik')->get();
+        $mekaniks = Mekanik::where('status', 'Aktif')->orderBy('nama')->get();
         $kendaraans = Kendaraan::orderBy('nomor_ranpur')->get();
 
         return view('livewire.jadwal-form', [

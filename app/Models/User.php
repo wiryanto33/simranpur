@@ -36,10 +36,6 @@ class User extends Authenticatable
         return $this->hasOne(DetailUser::class);
     }
 
-    public function laporanPerbaikan()
-    {
-        return $this->hasMany(LaporanPerbaikan::class, 'mekanik_id');
-    }
 
     public function laporanKerusakan()
     {

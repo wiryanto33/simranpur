@@ -28,6 +28,6 @@ class JadwalPemeliharaan extends Model
     
     public function mekanik()
     {
-        return $this->belongsToMany(User::class, 'jadwal_pemeliharaan_mekanik', 'jadwal_pemeliharaan_id', 'user_id');
+        return $this->belongsToMany(Mekanik::class, 'jadwal_pemeliharaan_mekanik', 'jadwal_pemeliharaan_id', 'mekanik_id');
     }
 }

@@ -41,7 +41,7 @@
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm font-bold text-gray-900">{{ $req->laporanKerusakan?->kendaraan?->nama ?? '-' }}</div>
-                                <div class="text-xs text-gray-500">Mekanik: {{ $req->mekanik->name }}</div>
+                                <div class="text-xs text-gray-500">Mekanik: {{ $req->mekanik->nama ?? '-' }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                                 {{ $req->tanggal_permintaan->format('d/m/Y H:i') }}
@@ -97,7 +97,7 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <p class="text-gray-500">Mekanik</p>
-                        <p class="font-semibold">{{ $activePermintaan->mekanik->name }}</p>
+                        <p class="font-semibold">{{ $activePermintaan->mekanik->nama ?? '-' }}</p>
                     </div>
                     <div>
                         <p class="text-gray-500">Unit Ranpur</p>

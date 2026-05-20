@@ -16,7 +16,7 @@ class JadwalController extends Controller
 
     public function cetakPdf($id)
     {
-        $jadwal = JadwalPemeliharaan::with(['kendaraan', 'mekanik', 'mekanik.detail'])->findOrFail($id);
+        $jadwal = JadwalPemeliharaan::with(['kendaraan', 'mekanik'])->findOrFail($id);
         
         $pdf = Pdf::loadView('jadwal.pdf', compact('jadwal'));
         

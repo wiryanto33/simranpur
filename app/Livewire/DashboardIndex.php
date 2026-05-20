@@ -7,6 +7,7 @@ use App\Models\Kendaraan;
 use App\Models\JadwalPemeliharaan;
 use App\Models\LaporanKerusakan;
 use App\Models\LaporanPerbaikan;
+use App\Models\Mekanik;
 use App\Models\SukuCadang;
 use App\Models\TransaksiSukuCadang;
 use App\Models\User;
@@ -47,7 +48,7 @@ class DashboardIndex extends Component
             $this->loadAdminStats();
         }
         
-        if ($user->hasAnyRole(['KepMek', 'Admin', 'Mekanik'])) {
+        if ($user->hasAnyRole(['KepMek', 'Admin'])) {
             $this->loadKepMekStats();
         }
         
@@ -125,12 +126,11 @@ class DashboardIndex extends Component
             ->latest()
             ->get();
 
-        $this->mechanicWorkload = User::whereHas('roles', function($q) {
-                $q->where('name', 'Mekanik');
-            })
-            ->withCount(['laporanPerbaikan as active_jobs' => function($q) {
+        $this->mechanicWorkload = Mekanik::withCount(['laporanPerbaikan as active_jobs' => function($q) {
                 $q->whereIn('status', ['Proses', 'Menunggu Approval']);
             }])
+            ->where('status', 'Aktif')
+            ->orderByDesc('active_jobs')
             ->get();
     }
 

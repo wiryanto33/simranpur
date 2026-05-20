@@ -23,7 +23,7 @@ class LaporanPerbaikanController extends Controller
         $perbaikan = LaporanPerbaikan::with([
             'laporanKerusakan.kendaraan',
             'laporanKerusakan.pelapor',
-            'mekanik.detail',
+            'mekanik',
             'approvedBy.detail',
             'transaksiSukuCadang.sukuCadang',
         ])->findOrFail($id);

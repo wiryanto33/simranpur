@@ -102,7 +102,7 @@
                             <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-600">{{ $js->jenis_pemeliharaan }}</td>
                             <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                                 @foreach($js->mekanik as $m)
-                                    <span class="inline-block px-2 py-0.5 bg-gray-100 rounded-md text-[10px] mr-1">{{ $m->name }}</span>
+                                    <span class="inline-block px-2 py-0.5 bg-gray-100 rounded-md text-[10px] mr-1">{{ $m->nama }}</span>
                                 @endforeach
                             </td>
                             <td class="px-6 py-3 whitespace-nowrap text-right">
@@ -200,7 +200,7 @@
     </div>
     @endrole
 
-    @role('Admin|KepMek|Mekanik')
+    @role('Admin|KepMek')
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Laporan Kerusakan Menunggu Verifikasi -->
         <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden ring-2 ring-red-500/20">
@@ -239,7 +239,7 @@
                 <div class="p-4 hover:bg-gray-50 flex justify-between items-center transition-colors">
                     <div>
                         <div class="text-sm font-bold text-gray-900">{{ $pa->laporanKerusakan?->kendaraan?->nomor_ranpur ?? 'Ranpur Terhapus' }}</div>
-                        <div class="text-xs text-gray-600 mt-1 uppercase font-medium">Mekanik: {{ $pa->mekanik?->name ?? '-' }}</div>
+                        <div class="text-xs text-gray-600 mt-1 uppercase font-medium">Mekanik: {{ $pa->mekanik?->nama ?? '-' }}</div>
                     </div>
                     <a href="{{ route('laporan-perbaikan.index') }}" class="text-[10px] font-bold text-white bg-yellow-600 px-3 py-1.5 rounded-lg shadow-sm hover:bg-yellow-700 uppercase">Periksa Hasil</a>
                 </div>
@@ -257,10 +257,10 @@
             @foreach($mechanicWorkload as $mw)
             <div class="p-4 bg-gray-50 rounded-xl border border-gray-100 flex items-center">
                 <div class="w-10 h-10 rounded-full bg-[#1B3A2D] flex items-center justify-center text-white font-bold mr-4 text-sm shadow-md">
-                    {{ substr($mw->name, 0, 1) }}
+                    {{ substr($mw->nama, 0, 1) }}
                 </div>
                 <div>
-                    <h5 class="text-sm font-bold text-gray-800">{{ $mw->name }}</h5>
+                    <h5 class="text-sm font-bold text-gray-800">{{ $mw->nama }}</h5>
                     <div class="flex items-center">
                         @if($mw->active_jobs > 0)
                             <div class="animate-pulse bg-orange-500 w-2 h-2 rounded-full mr-2"></div>
@@ -431,7 +431,7 @@
                                     <h5 class="text-sm font-bold text-gray-800">{{ $ar->deskripsi }}</h5>
                                     <p class="text-xs text-gray-500 mt-1">Dilaporkan pada: {{ \Carbon\Carbon::parse($ar->tanggal)->format('d M Y') }}</p>
                                     @if($ar->laporanPerbaikan)
-                                        <p class="text-xs text-[#1B3A2D] font-medium mt-1 uppercase">Ditangani oleh: {{ $ar->laporanPerbaikan->mekanik->name ?? 'Tim Mekanik' }}</p>
+                                        <p class="text-xs text-[#1B3A2D] font-medium mt-1 uppercase">Ditangani oleh: {{ $ar->laporanPerbaikan->mekanik->nama ?? 'Tim Mekanik' }}</p>
                                     @endif
                                 </div>
                                 <div class="mt-2 sm:mt-0">
@@ -475,7 +475,7 @@
                                     {{ $rh->laporanPerbaikan->tindakan ?? 'Selesai' }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-[#1B3A2D] font-medium">
-                                    {{ $rh->laporanPerbaikan->mekanik->name ?? '-' }}
+                                    {{ $rh->laporanPerbaikan->mekanik->nama ?? '-' }}
                                 </td>
                             </tr>
                             @empty

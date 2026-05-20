@@ -12,7 +12,7 @@
         }
         .header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             border-bottom: 2px solid #000;
             padding-bottom: 10px;
         }
@@ -26,7 +26,7 @@
         }
         .title {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         .title h3 {
             text-decoration: underline;
@@ -34,7 +34,7 @@
         }
         .content-table {
             width: 100%;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             border-collapse: collapse;
         }
         .content-table td {
@@ -58,7 +58,7 @@
         .checklist-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         .checklist-table th, .checklist-table td {
             border: 1px solid #ddd;
@@ -69,7 +69,8 @@
             background-color: #f9f9f9;
         }
         .footer {
-            margin-top: 50px;
+            margin-top: 20px;
+            page-break-inside: avoid;
         }
         .signature-table {
             width: 100%;
@@ -79,7 +80,7 @@
             text-align: center;
         }
         .signature-box {
-            height: 80px;
+            height: 50px;
         }
     </style>
 </head>
@@ -143,9 +144,9 @@
             @foreach($jadwal->mekanik as $index => $m)
             <tr>
                 <td style="text-align: center;">{{ $index + 1 }}</td>
-                <td>{{ $m->name }}</td>
-                <td>{{ $m->detail->pangkat ?? '-' }} / {{ $m->detail->nrp ?? '-' }}</td>
-                <td>Mekanik</td>
+                <td>{{ $m->nama }}</td>
+                <td>{{ $m->pangkat ?? '-' }} / {{ $m->nrp ?? '-' }}</td>
+                <td>{{ $m->jabatan ?? 'Mekanik' }}</td>
             </tr>
             @endforeach
         </tbody>

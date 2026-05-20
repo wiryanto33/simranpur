@@ -26,7 +26,6 @@ class RolePermissionSeeder extends Seeder
             'KepMek',
             'Logistik',
             'Operator',
-            'Mekanik',
         ];
 
         foreach ($roles as $role) {
@@ -45,6 +44,7 @@ class RolePermissionSeeder extends Seeder
             'transaksi_suku_cadang',
             'permintaan_suku_cadang',
             'user',
+            'mekanik',
         ];
 
         foreach ($modules as $module) {
@@ -101,6 +101,9 @@ class RolePermissionSeeder extends Seeder
         $kepmekRole->syncPermissions([
             'view_kendaraan',
             'view_jadwal_pemeliharaan',
+            'create_jadwal_pemeliharaan',
+            'edit_jadwal_pemeliharaan',
+            'delete_jadwal_pemeliharaan',
             'view_laporan_kerusakan',
             'create_laporan_kerusakan',
             'edit_laporan_kerusakan',
@@ -110,6 +113,11 @@ class RolePermissionSeeder extends Seeder
             'view_suku_cadang',
             'view_permintaan_suku_cadang',
             'create_permintaan_suku_cadang',
+            // Kelola data mekanik
+            'view_mekanik',
+            'create_mekanik',
+            'edit_mekanik',
+            'delete_mekanik',
             // Laporan rekap teknis
             'view_laporan_rekap_kesiapan',
             'view_laporan_rekap_pemeliharaan',
@@ -142,21 +150,7 @@ class RolePermissionSeeder extends Seeder
             'create_laporan_kerusakan',
         ]);
 
-        // MEKANIK — lihat jadwal & laporan teknis yang ditugaskan
-        $mekanikRole = Role::findByName('Mekanik');
-        $mekanikRole->syncPermissions([
-            'view_kendaraan',
-            'view_jadwal_pemeliharaan',
-            'view_laporan_kerusakan',
-            'view_laporan_perbaikan',
-            'create_laporan_perbaikan',
-            'view_suku_cadang',
-            'view_permintaan_suku_cadang',
-            'create_permintaan_suku_cadang',
-            // Laporan rekap terbatas untuk mekanik
-            'view_laporan_rekap_pemeliharaan',
-            'view_laporan_rekap_kerusakan',
-        ]);
+        // (Blok Mekanik role dihapus — mekanik bukan lagi role user)
 
         // =====================================================================
         // CREATE DEFAULT USERS

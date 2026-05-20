@@ -40,7 +40,7 @@
                     <option value="">Semua Mekanik</option>
                     @foreach(collect($mekaniks) as $m)
                         @if(is_object($m))
-                            <option value="{{ $m->id }}">{{ $m->name }}</option>
+                            <option value="{{ $m->id }}">{{ $m->nama }}</option>
                         @endif
                     @endforeach
                 </select>
@@ -141,7 +141,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 @foreach($j->mekanik as $m)
-                                    <span class="block">• {{ $m->name }}</span>
+                                    <span class="block">• {{ $m->nama }}</span>
                                 @endforeach
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm">
@@ -166,7 +166,7 @@
                                     $isAssignedMekanik = $j->mekanik->contains(auth()->id());
                                 @endphp
 
-                                @if(auth()->user()->can('edit_jadwal_pemeliharaan') || (auth()->user()->hasRole('Mekanik') && $isAssignedMekanik))
+                                @if(auth()->user()->can('edit_jadwal_pemeliharaan'))
                                     <select 
                                         x-data 
                                         @change="$wire.updateStatus({{ $j->id }}, $event.target.value); $event.target.value=''" 
@@ -278,11 +278,11 @@
                             @foreach($selectedJadwal->mekanik as $m)
                                 <div class="flex items-center p-2 bg-gray-50 border border-gray-100 rounded-lg">
                                     <div class="w-8 h-8 rounded-full bg-[#1B3A2D] flex items-center justify-center text-white text-xs font-bold mr-3 shadow-sm">
-                                        {{ substr($m->name, 0, 1) }}
+                                        {{ substr($m->nama, 0, 1) }}
                                     </div>
                                     <div>
-                                        <div class="text-sm font-semibold text-gray-800">{{ $m->name }}</div>
-                                        <div class="text-[10px] text-gray-500 uppercase">{{ $m->detail->pangkat ?? 'Mekanik' }}</div>
+                                        <div class="text-sm font-semibold text-gray-800">{{ $m->nama }}</div>
+                                        <div class="text-[10px] text-gray-500 uppercase">{{ $m->jabatan ?? 'Mekanik' }}</div>
                                     </div>
                                 </div>
                             @endforeach

@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\JadwalPemeliharaan;
 use App\Models\Kendaraan;
-use App\Models\User;
+use App\Models\Mekanik;
 use Illuminate\Support\Facades\Cache;
 
 class LaporanPemeliharaan extends Component
@@ -33,7 +33,7 @@ class LaporanPemeliharaan extends Component
 
         if ($this->mekanik_id) {
             $query->whereHas('mekanik', function($q) {
-                $q->where('users.id', $this->mekanik_id);
+                $q->where('mekanik.id', $this->mekanik_id);
             });
         }
 
@@ -46,7 +46,7 @@ class LaporanPemeliharaan extends Component
         return view('livewire.laporan-pemeliharaan', [
             'jadwals' => $query->latest('tanggal')->get(),
             'kendaraans' => $kendaraans,
-            'mekaniks' => User::role('Mekanik')->get()
+            'mekaniks' => Mekanik::orderBy('nama')->get()
         ]);
     }
 }

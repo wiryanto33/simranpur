@@ -78,7 +78,7 @@
     <div class="section">
         <div class="section-title">C. PELAKSANAAN PERBAIKAN</div>
         <table class="info-table">
-            <tr><td>Mekanik Pelaksana</td><td>{{ $perbaikan->mekanik->name ?? '-' }}</td></tr>
+            <tr><td>Mekanik Pelaksana</td><td>{{ $perbaikan->mekanik->nama ?? '-' }}</td></tr>
             <tr><td>Tanggal Mulai</td><td>{{ $perbaikan->tanggal_mulai?->format('d M Y') ?? '-' }}</td></tr>
             <tr><td>Tanggal Selesai</td><td>{{ $perbaikan->tanggal_selesai?->format('d M Y') ?? '-' }}</td></tr>
             <tr><td>Status Perbaikan</td><td>{{ $perbaikan->status }}</td></tr>

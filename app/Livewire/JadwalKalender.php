@@ -13,12 +13,7 @@ class JadwalKalender extends Component
     {
         $query = JadwalPemeliharaan::with(['kendaraan', 'mekanik']);
         
-        // Filter for specific mechanic if user is a Mechanic
-        if (auth()->user()->hasRole('Mekanik')) {
-            $query->whereHas('mekanik', function($q) {
-                $q->where('users.id', auth()->id());
-            });
-        }
+        // Semua jadwal ditampilkan (mekanik bukan lagi role user)
         
         $jadwal = $query->get();
         
@@ -47,7 +42,7 @@ class JadwalKalender extends Component
                     'jenis' => $j->jenis_pemeliharaan,
                     'status' => $j->status,
                     'kendaraan' => $j->kendaraan->nama ?? '-',
-                    'mekanik' => $j->mekanik->pluck('name')->implode(', ') ?: '-',
+                    'mekanik' => $j->mekanik->pluck('nama')->implode(', ') ?: '-',
                     'estimasi' => $j->estimasi_hari,
                     'checklistCount' => is_array($j->checklist) ? count($j->checklist) : 0
                 ]

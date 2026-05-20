@@ -19,7 +19,7 @@ class PermintaanSukuCadang extends Model
 
     public function mekanik()
     {
-        return $this->belongsTo(User::class, 'mekanik_id');
+        return $this->belongsTo(Mekanik::class, 'mekanik_id');
     }
 
     public function checker()

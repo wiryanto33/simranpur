@@ -6,7 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\JadwalPemeliharaan;
 use App\Models\Kendaraan;
-use App\Models\User;
+use App\Models\Mekanik;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class JadwalIndex extends Component
@@ -86,11 +86,6 @@ class JadwalIndex extends Component
         
         if($user->hasRole('Admin') || $user->hasRole('KepMek')) {
             $canUpdate = true;
-        } elseif ($user->hasRole('Mekanik') && $jadwal->mekanik_id == $user->id) {
-            // Mekanik hanya boleh update Terjadwal -> Sedang Dikerjakan -> Selesai
-            if(in_array($status, ['Sedang Dikerjakan', 'Selesai'])) {
-                $canUpdate = true;
-            }
         }
         
         if(!$canUpdate) abort(403);
@@ -151,19 +146,15 @@ class JadwalIndex extends Component
 
     private function buildQuery()
     {
-        $query = JadwalPemeliharaan::with(['kendaraan', 'mekanik', 'mekanik.detail']);
+        $query = JadwalPemeliharaan::with(['kendaraan', 'mekanik']);
 
-        // Filter for specific mechanic if user is a Mechanic
-        if (auth()->user()->hasRole('Mekanik')) {
-            $query->whereHas('mekanik', function($q) {
-                $q->where('users.id', auth()->id());
-            });
-        }
+        // Hanya Admin & KepMek yang bisa lihat semua jadwal
+        // (Mekanik bukan lagi role user, sehingga tidak ada filter per-user)
 
         // filter
         if ($this->filterJenis) $query->where('jenis_pemeliharaan', $this->filterJenis);
         if ($this->filterStatus) $query->where('status', $this->filterStatus);
-        if ($this->filterMekanik) $query->whereHas('mekanik', fn($q) => $q->where('users.id', $this->filterMekanik));
+        if ($this->filterMekanik) $query->whereHas('mekanik', fn($q) => $q->where('mekanik.id', $this->filterMekanik));
         if ($this->filterKendaraan) $query->where('kendaraan_id', $this->filterKendaraan);
         
         if ($this->filterBulan) {
@@ -179,7 +170,7 @@ class JadwalIndex extends Component
 
     public function render()
     {
-        $mekaniks = User::role('Mekanik')->get();
+        $mekaniks = Mekanik::orderBy('nama')->get();
         $kendaraans = Kendaraan::orderBy('nomor_ranpur')->get();
 
         return view('livewire.jadwal-index', [

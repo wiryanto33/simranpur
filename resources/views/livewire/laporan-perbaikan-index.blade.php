@@ -68,7 +68,7 @@
                                 <div class="text-xs text-gray-500">{{ $item->laporanKerusakan->kendaraan->no_register ?? '-' }}</div>
                             </td>
                             <td class="px-5 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $item->mekanik->name ?? '-' }}</div>
+                                <div class="text-sm text-gray-900">{{ $item->mekanik->nama ?? '-' }}</div>
                             </td>
                             <td class="px-5 py-4 whitespace-nowrap text-sm text-gray-700">
                                 <div>{{ $item->tanggal_mulai?->format('d M Y') }}</div>

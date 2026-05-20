@@ -57,7 +57,7 @@
                 <div>
                     <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 pb-2 border-b">Tim Perbaikan</h4>
                     <div class="space-y-2 text-sm">
-                        <div class="flex justify-between"><span class="text-gray-500">Mekanik</span><span class="font-semibold text-gray-800">{{ $perbaikan->mekanik->name ?? '-' }}</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">Mekanik</span><span class="font-semibold text-gray-800">{{ $perbaikan->mekanik->nama ?? '-' }}</span></div>
                         <div class="flex justify-between"><span class="text-gray-500">Mulai</span><span class="font-semibold text-gray-800">{{ $perbaikan->tanggal_mulai?->format('d M Y') ?? '-' }}</span></div>
                         <div class="flex justify-between"><span class="text-gray-500">Selesai</span><span class="font-semibold text-gray-800 {{ !$perbaikan->tanggal_selesai ? 'text-orange-500' : '' }}">{{ $perbaikan->tanggal_selesai?->format('d M Y') ?? 'Belum selesai' }}</span></div>
                         @if($perbaikan->approvedBy)
