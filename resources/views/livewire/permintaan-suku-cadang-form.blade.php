@@ -25,6 +25,16 @@
                 </div>
 
                 <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Mekanik Pelaksana <span class="text-gray-400 font-normal">(Opsional)</span></label>
+                    <select wire:model="mekanik_id" class="w-full text-sm rounded-md border-gray-300 shadow-sm focus:border-[#1B3A2D] focus:ring-[#1B3A2D]">
+                        <option value="">-- Pilih Mekanik --</option>
+                        @foreach($mekaniks as $m)
+                            <option value="{{ $m->id }}">{{ $m->nama }} {{ $m->pangkat ? '('.$m->pangkat.')' : '' }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Pilih Suku Cadang yang Dibutuhkan</label>
                     <div class="space-y-3">
                         @foreach($items as $index => $item)

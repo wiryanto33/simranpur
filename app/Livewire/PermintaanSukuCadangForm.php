@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\LaporanKerusakan;
+use App\Models\Mekanik;
 use App\Models\SukuCadang;
 use App\Models\PermintaanSukuCadang;
 use App\Models\PermintaanSukuCadangDetail;
@@ -17,6 +18,7 @@ class PermintaanSukuCadangForm extends Component
     public $showModal = false;
     public $laporanId;
     public $laporan;
+    public $mekanik_id = null;
     public $keterangan = '';
     public $items = []; // [['suku_cadang_id' => '', 'jumlah' => 1]]
 
@@ -26,7 +28,7 @@ class PermintaanSukuCadangForm extends Component
     {
         $this->laporanId = $laporanId;
         $this->laporan = LaporanKerusakan::with('kendaraan')->findOrFail($laporanId);
-        $this->reset(['keterangan', 'items']);
+        $this->reset(['keterangan', 'items', 'mekanik_id']);
         $this->addItem();
         $this->showModal = true;
     }
@@ -62,7 +64,7 @@ class PermintaanSukuCadangForm extends Component
         DB::transaction(function () {
             $permintaan = PermintaanSukuCadang::create([
                 'laporan_kerusakan_id' => $this->laporanId,
-                'mekanik_id'           => auth()->id(),
+                'mekanik_id'           => $this->mekanik_id ?: null,
                 'status'               => 'Pending',
                 'keterangan'           => $this->keterangan,
                 'tanggal_permintaan'   => now(),
@@ -96,9 +98,11 @@ class PermintaanSukuCadangForm extends Component
     public function render()
     {
         $sukuCadangList = SukuCadang::where('stok', '>', 0)->orderBy('nama')->get();
+        $mekanikList    = Mekanik::where('status', 'Aktif')->orderBy('nama')->get();
 
         return view('livewire.permintaan-suku-cadang-form', [
             'sukuCadangs' => $sukuCadangList,
+            'mekaniks'    => $mekanikList,
         ]);
     }
 }
