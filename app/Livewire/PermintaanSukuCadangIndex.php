@@ -93,9 +93,10 @@ class PermintaanSukuCadangIndex extends Component
              // Update status laporan kerusakan → Siap Diperbaiki
             $permintaan->laporanKerusakan?->update(['status' => 'Siap Diperbaiki']);
 
+            $kendaraan = $permintaan->laporanKerusakan->kendaraan;
+
             // Kirim Notifikasi ke Mekanik
             if ($permintaan->mekanik) {
-                $kendaraan = $permintaan->laporanKerusakan->kendaraan;
                 Notification::send($permintaan->mekanik, new SystemNotification(
                     'Permintaan Suku Cadang Disetujui',
                     'Suku cadang untuk kendaraan ' . ($kendaraan->nomor_ranpur ?? $kendaraan->nama) . ' telah tersedia. Anda dapat memulai perbaikan.',
@@ -103,6 +104,15 @@ class PermintaanSukuCadangIndex extends Component
                     'success'
                 ));
             }
+
+            // Kirim Notifikasi ke Kepala Mekanik
+            $kepMeks = User::role('KepMek')->get();
+            Notification::send($kepMeks, new SystemNotification(
+                'Permintaan Suku Cadang Disetujui',
+                'Permintaan suku cadang untuk kendaraan ' . ($kendaraan->nomor_ranpur ?? $kendaraan->nama) . ' telah disetujui.',
+                route('permintaan-suku-cadang.index', ['filterStatus' => 'Approved']),
+                'success'
+            ));
         });
 
         $this->confirmingApproval = false;
@@ -133,9 +143,10 @@ class PermintaanSukuCadangIndex extends Component
              // Kembalikan status kerusakan → Diverifikasi (agar bisa diajukan ulang jika revisi)
             $permintaan->laporanKerusakan?->update(['status' => 'Diverifikasi']);
 
+            $kendaraan = $permintaan->laporanKerusakan->kendaraan;
+
             // Kirim Notifikasi ke Mekanik
             if ($permintaan->mekanik) {
-                $kendaraan = $permintaan->laporanKerusakan->kendaraan;
                 Notification::send($permintaan->mekanik, new SystemNotification(
                     'Permintaan Suku Cadang Ditolak',
                     'Permintaan suku cadang untuk ' . ($kendaraan->nomor_ranpur ?? $kendaraan->nama) . ' ditolak. Alasan: ' . ($this->alasanPenolakan ?: '-'),
@@ -143,6 +154,15 @@ class PermintaanSukuCadangIndex extends Component
                     'danger'
                 ));
             }
+
+            // Kirim Notifikasi ke Kepala Mekanik
+            $kepMeks = User::role('KepMek')->get();
+            Notification::send($kepMeks, new SystemNotification(
+                'Permintaan Suku Cadang Ditolak',
+                'Permintaan suku cadang untuk ' . ($kendaraan->nomor_ranpur ?? $kendaraan->nama) . ' ditolak. Alasan: ' . ($this->alasanPenolakan ?: '-'),
+                route('permintaan-suku-cadang.index', ['filterStatus' => 'Rejected']),
+                'danger'
+            ));
         });
 
         $this->confirmingRejection = false;
