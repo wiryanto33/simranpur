@@ -41,6 +41,17 @@
                                 </div>
 
                                 <div class="col-span-2">
+                                    <label class="block text-sm font-medium text-gray-700">Mekanik Pelaksana <span class="text-red-500">*</span></label>
+                                    <select wire:model="mekanik_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#2D5A45] focus:ring focus:ring-[#2D5A45] focus:ring-opacity-50">
+                                        <option value="">-- Pilih Mekanik --</option>
+                                        @foreach($mekaniks as $m)
+                                            <option value="{{ $m->id }}">{{ $m->nama_lengkap }} (NRP: {{ $m->nrp ?? '-' }})</option>
+                                        @endforeach
+                                    </select>
+                                    @error('mekanik_id') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                </div>
+
+                                <div class="col-span-2">
                                     <label class="block text-sm font-medium text-gray-700">Uraian Pekerjaan <span class="text-red-500">*</span></label>
                                     <textarea wire:model="deskripsi" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#2D5A45] focus:ring focus:ring-[#2D5A45] focus:ring-opacity-50" placeholder="Jelaskan tindakan perbaikan yang dilakukan..."></textarea>
                                     @error('deskripsi') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror

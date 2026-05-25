@@ -27,6 +27,7 @@ class LaporanPerbaikanForm extends Component
     public $tanggal_mulai;
     public $tanggal_selesai;
     public $deskripsi;
+    public $mekanik_id;
     public $fotos_hasil = [];
     public $fotos_existing = [];
 
@@ -38,6 +39,7 @@ class LaporanPerbaikanForm extends Component
         'tanggal_mulai'       => 'required|date',
         'tanggal_selesai'     => 'nullable|date|after_or_equal:tanggal_mulai',
         'deskripsi'           => 'required|string|min:10',
+        'mekanik_id'          => 'required|exists:mekanik,id',
         'fotos_hasil'         => 'nullable|array|max:5',
         'fotos_hasil.*'       => 'image|max:2048',
         'sukuCadangList'      => 'nullable|array',
@@ -48,9 +50,9 @@ class LaporanPerbaikanForm extends Component
     #[\Livewire\Attributes\On('buatPerbaikan')]
     public function openForm($id_kerusakan)
     {
-        $this->reset(['perbaikanId', 'isEdit', 'tanggal_mulai', 'tanggal_selesai', 'deskripsi', 'fotos_hasil', 'fotos_existing', 'sukuCadangList', 'activeRequest']);
+        $this->reset(['perbaikanId', 'isEdit', 'tanggal_mulai', 'tanggal_selesai', 'deskripsi', 'fotos_hasil', 'fotos_existing', 'sukuCadangList', 'activeRequest', 'mekanik_id']);
         $this->resetValidation();
-
+ 
         $this->idKerusakan = $id_kerusakan;
         $this->dataKerusakan = LaporanKerusakan::with('kendaraan')->find($id_kerusakan);
         
@@ -59,7 +61,7 @@ class LaporanPerbaikanForm extends Component
             ->where('laporan_kerusakan_id', $id_kerusakan)
             ->where('status', 'Approved')
             ->first();
-
+ 
         if ($this->activeRequest) {
             foreach ($this->activeRequest->details as $detail) {
                 $this->sukuCadangList[] = [
@@ -69,8 +71,9 @@ class LaporanPerbaikanForm extends Component
                     'satuan' => $detail->sukuCadang->satuan
                 ];
             }
+            $this->mekanik_id = $this->activeRequest->mekanik_id;
         }
-
+ 
         $this->tanggal_mulai = now()->format('Y-m-d');
         $this->showForm = true;
     }
@@ -93,6 +96,7 @@ class LaporanPerbaikanForm extends Component
         $this->deskripsi = $perbaikan->deskripsi;
         $this->fotos_existing = $perbaikan->foto_hasil ?? [];
         $this->fotos_hasil = [];
+        $this->mekanik_id = $perbaikan->mekanik_id;
 
         $this->sukuCadangList = [];
         foreach ($perbaikan->transaksiSukuCadang as $trx) {
@@ -152,17 +156,18 @@ class LaporanPerbaikanForm extends Component
             }
 
             $perbaikan->update([
+                'mekanik_id'      => $this->mekanik_id,
                 'tanggal_mulai'   => $this->tanggal_mulai,
                 'tanggal_selesai' => $this->tanggal_selesai,
                 'deskripsi'       => $this->deskripsi,
                 'foto_hasil'      => array_merge($this->fotos_existing, $newFotoPaths),
             ]);
-
+ 
             $message = 'Laporan perbaikan berhasil diperbarui.';
         } else {
             $perbaikan = LaporanPerbaikan::create([
                 'laporan_kerusakan_id' => $this->idKerusakan,
-                'mekanik_id'           => auth()->id(),
+                'mekanik_id'           => $this->mekanik_id,
                 'tanggal_mulai'        => $this->tanggal_mulai,
                 'tanggal_selesai'      => $this->tanggal_selesai,
                 'deskripsi'            => $this->deskripsi,
@@ -212,7 +217,8 @@ class LaporanPerbaikanForm extends Component
         }
 
         return view('livewire.laporan-perbaikan-form', [
-            'allSukuCadang' => $allSukuCadang
+            'allSukuCadang' => $allSukuCadang,
+            'mekaniks'      => \App\Models\Mekanik::where('status', 'Aktif')->orderBy('nama')->get()
         ]);
     }
 }
