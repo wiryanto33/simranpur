@@ -50,12 +50,14 @@ class LaporanPerbaikanIndex extends Component
             $mekanik = $perbaikan->mekanik;
             $kendaraan = $perbaikan->laporanKerusakan->kendaraan;
 
-            Notification::send($mekanik, new SystemNotification(
-                'Perbaikan Disetujui',
-                'Laporan perbaikan Anda untuk ' . ($kendaraan->nomor_ranpur ?? $kendaraan->nama) . ' telah disetujui.',
-                route('laporan-perbaikan.index'),
-                'success'
-            ));
+            if ($mekanik) {
+                Notification::send($mekanik, new SystemNotification(
+                    'Perbaikan Disetujui',
+                    'Laporan perbaikan Anda untuk ' . ($kendaraan->nomor_ranpur ?? $kendaraan->nama) . ' telah disetujui.',
+                    route('laporan-perbaikan.index'),
+                    'success'
+                ));
+            }
 
             if ($pelapor) {
                 Notification::send($pelapor, new SystemNotification(
@@ -87,12 +89,14 @@ class LaporanPerbaikanIndex extends Component
         $perbaikan = LaporanPerbaikan::with('laporanKerusakan.kendaraan')->findOrFail($id);
         $perbaikan->update(['status' => 'Perlu Revisi']);
         
-        Notification::send($perbaikan->mekanik, new SystemNotification(
-            'Revisi Laporan Perbaikan',
-            'Laporan perbaikan ' . ($perbaikan->laporanKerusakan->kendaraan->nomor_ranpur ?? $perbaikan->laporanKerusakan->kendaraan->nama) . ' butuh revisi.',
-            route('laporan-perbaikan.index'),
-            'warning'
-        ));
+        if ($perbaikan->mekanik) {
+            Notification::send($perbaikan->mekanik, new SystemNotification(
+                'Revisi Laporan Perbaikan',
+                'Laporan perbaikan ' . ($perbaikan->laporanKerusakan->kendaraan->nomor_ranpur ?? $perbaikan->laporanKerusakan->kendaraan->nama) . ' butuh revisi.',
+                route('laporan-perbaikan.index'),
+                'warning'
+            ));
+        }
 
         session()->flash('message', 'Laporan dikembalikan ke mekanik untuk direvisi.');
         $this->resetPage();
