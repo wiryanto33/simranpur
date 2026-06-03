@@ -94,7 +94,7 @@ class LaporanKerusakanIndex extends Component
         }
 
         return view('livewire.laporan-kerusakan-index', [
-            'laporans' => $query->latest('tanggal')->paginate(10),
+            'laporans' => $query->orderBy('tanggal', 'desc')->orderBy('id', 'desc')->paginate(10),
         ]);
     }
 }
