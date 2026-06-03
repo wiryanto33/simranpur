@@ -53,9 +53,21 @@ class RoleForm extends Component
             if(!isset($grouped[$resTitle])) {
                 $grouped[$resTitle] = [];
             }
+
+            $label = ucfirst($action);
+            if ($resource === 'laporan_perbaikan') {
+                $label = match($action) {
+                    'view' => 'Detail',
+                    'approve' => 'Setujui',
+                    'revisi' => 'Revisi',
+                    'delete' => 'Hapus',
+                    default => ucfirst($action)
+                };
+            }
+
             $grouped[$resTitle][] = [
                 'name' => $p->name,
-                'action_label' => ucfirst($action)
+                'action_label' => $label
             ];
         }
 

@@ -55,6 +55,8 @@ class RolePermissionSeeder extends Seeder
         }
 
         Permission::firstOrCreate(['name' => 'approve_permintaan_suku_cadang']);
+        Permission::firstOrCreate(['name' => 'approve_laporan_perbaikan']);
+        Permission::firstOrCreate(['name' => 'revisi_laporan_perbaikan']);
 
         // =====================================================================
         // LAPORAN & REKAP PERMISSIONS (granular per sub-modul)
@@ -110,6 +112,8 @@ class RolePermissionSeeder extends Seeder
             'view_laporan_perbaikan',
             'create_laporan_perbaikan',
             'edit_laporan_perbaikan',
+            'approve_laporan_perbaikan',
+            'revisi_laporan_perbaikan',
             'view_suku_cadang',
             'view_permintaan_suku_cadang',
             'create_permintaan_suku_cadang',

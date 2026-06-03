@@ -34,7 +34,7 @@ class LaporanPerbaikanIndex extends Component
 
     public function approve($id)
     {
-        if (!auth()->user()->can('edit_laporan_perbaikan')) abort(403);
+        if (!auth()->user()->can('approve_laporan_perbaikan')) abort(403);
 
         $perbaikan = LaporanPerbaikan::with('laporanKerusakan.kendaraan')->findOrFail($id);
         $perbaikan->update([
@@ -84,7 +84,7 @@ class LaporanPerbaikanIndex extends Component
 
      public function kembalikan($id)
     {
-        if (!auth()->user()->can('edit_laporan_perbaikan')) abort(403);
+        if (!auth()->user()->can('revisi_laporan_perbaikan')) abort(403);
 
         $perbaikan = LaporanPerbaikan::with('laporanKerusakan.kendaraan')->findOrFail($id);
         $perbaikan->update(['status' => 'Perlu Revisi']);

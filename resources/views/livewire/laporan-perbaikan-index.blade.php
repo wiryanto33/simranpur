@@ -94,13 +94,20 @@
                                 <a href="{{ route('laporan-perbaikan.show', $item->id) }}" class="text-indigo-600 hover:text-indigo-900 border border-indigo-200 px-3 py-1 rounded bg-indigo-50">Detail</a>
                                 @endcan
 
-                                @can('edit_laporan_perbaikan')
-                                @if($item->status === 'Menunggu Approval' && auth()->user()->hasAnyRole(['KepMek', 'Admin']))
+                                @can('approve_laporan_perbaikan')
+                                @if($item->status === 'Menunggu Approval')
                                     <button wire:click="approve({{ $item->id }})" wire:confirm="Setujui laporan perbaikan ini?" class="text-green-700 hover:text-green-900 border border-green-300 px-3 py-1 rounded bg-green-50">Setujui</button>
+                                @endif
+                                @endcan
+
+                                @can('revisi_laporan_perbaikan')
+                                @if($item->status === 'Menunggu Approval')
                                     <button wire:click="kembalikan({{ $item->id }})" class="text-yellow-600 hover:text-yellow-900 border border-yellow-300 px-3 py-1 rounded bg-yellow-50">Revisi</button>
                                 @endif
+                                @endcan
                                 
-                                @if($item->status !== 'Disetujui' && (auth()->id() === $item->mekanik_id || auth()->user()->hasAnyRole(['KepMek', 'Admin'])))
+                                @can('edit_laporan_perbaikan')
+                                @if($item->status !== 'Disetujui')
                                     <button wire:click="$dispatchTo('laporan-perbaikan-form', 'editPerbaikan', { id: {{ $item->id }} })" class="text-blue-600 hover:text-blue-900 border border-blue-200 px-3 py-1 rounded bg-blue-50">Edit</button>
                                 @endif
                                 @endcan
